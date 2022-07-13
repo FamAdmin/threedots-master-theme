@@ -1,0 +1,186 @@
+{% if settings.collection_swatches %}
+{% unless product.title contains '|' %}
+  {% assign file_extension = 'png' %}
+
+  {% for option in product.options %}
+    {% assign downcased_option = option | downcase %}
+    {% if downcased_option contains 'color' or downcased_option contains 'colour' %}
+      {% assign option_index = forloop.index0 %}
+      {% assign values = '' %}
+      <div class="collection_swatches">
+        {% for variant in product.variants %}
+
+          {% if variant.inventory_quantity > 0 %}
+            {% unless variant.featured_image == null %}
+
+            {% assign value = variant.options[option_index] %}
+            {% unless values contains value %}
+              {% assign values = values | join: ',' %}
+              {% assign values = values | append: ',' | append: value %}
+              {% assign values = values | split: ',' %}
+
+              {% comment %}
+              <!-- <a href="{{ variant.url | within: collection }}" class="swatch" data-swatch-name="meta-{{ downcased_option }}_{{ value | replace: ' ', '_' | downcase }}">
+                <span {% if section.settings.products_per_row == 2 %}
+                        data-image="{{ variant.featured_image | product_img_url: '600x' }}"
+                      {% elsif section.settings.products_per_row == 3 %}
+                        data-image="{{ variant.featured_image | product_img_url: '500x' }}"
+                      {% else %}
+                        data-image="{{ variant.featured_image | product_img_url: '400x' }}"
+                      {% endif %}
+                      style="background-image: url({{ value | handle | append: '.' | append: file_extension | asset_img_url: '50x' | prepend: 'https:' }}); background-color: {{ value | split: ' ' | last | handle }};">
+                  </span>
+              </a> -->
+              {% endcomment %}
+
+              {% for i in (1..25) %}
+                {% comment %}
+                <!-- TODO: color swatch replacement -->
+                {% endcomment %}
+                {% assign variantColor = product.variants[i].option1 | replace: '/ ', ' ' | replace: '/', ' ' | replace: '  ', ' ' | replace: ' ', '-' | replace: "'", "" | upcase %}
+                {% assign styleNumber = product.handle | upcase %}
+                {% if product.variants[i].option1 == value %}
+                  {% assign variantImage = product.variants[i].featured_image.src %}
+                  {% comment %}
+                  <!-- <label for="swatch-{{ option_index }}-{{ value | handle }}-{{ product.id }}" style="background-image: url({{ product.variants[i].featured_image.src | img_url: '50x' | prepend: 'https:' }}); background-color: {{ value | split: ' ' | last | handle }};"> -->
+                  <!-- <label for="swatch-{{ option_index }}-{{ value | handle }}-{{ product.id }}" style="background-image: url(https://cdn.shopify.com/s/files/1/0102/0923/0929/files/{{styleNumber}}-{{variantColor}}.png?221); background-color: {{ value | split: ' ' | last | handle }};">
+                    <span class="crossed-out"></span>
+                  </label> -->
+                  {% endcomment %}
+                  <a href="{{ product.variants[i].url | within: collection }}" class="swatch" data-swatch-name="meta-{{ downcased_option }}_{{ value | replace: ' ', '_' | downcase }}">
+                    <span {% if section.settings.products_per_row == 2 %}
+                            data-image="{{ product.variants[i].featured_image | product_img_url: '600x' }}"
+                          {% elsif section.settings.products_per_row == 3 %}
+                            data-image="{{ product.variants[i].featured_image | product_img_url: '500x' }}"
+                          {% else %}
+                            data-image="{{ product.variants[i].featured_image | product_img_url: '400x' }}"
+                          {% endif %}
+                          style="background-image: url(https://cdn.shopify.com/s/files/1/0102/0923/0929/files/{{styleNumber}}-{{variantColor}}.png?221); background-color: {{ value | split: ' ' | last | handle }};">
+                      </span>
+                  </a>
+                {% if i == 25 %}
+                  <a class="more-cross" href="{{ product.variants[i].url | within: collection }}">+</a>
+                {% endif %}
+                {% break %}
+                {% endif %}
+              {% endfor %}
+
+            {% endunless %}
+          {% endunless %}
+          {% endif %}
+        {% endfor %}
+
+      </div>
+    {% endif %}
+  {% endfor %}
+{% endunless %}
+{% endif %}
+
+{% comment %}
+      Swatches implementation through metafields bellow
+{% endcomment %}
+
+{% if product.title contains '|' %}
+
+
+{%- assign color_swatches = product.metafields.color.swatches | split: ',' -%}
+
+  <div class="grid-swatches cf tc mv2 pt1" id="{{ product.id }}">
+  {% if color_swatches.size > 0 %}
+   
+    
+    
+    <script class="metafield-script">
+      var prod = metafield_swatches.find(p => p.product_id == {{ product.id | json }});
+	  prod.init();
+    </script>
+    
+    {% comment %}
+		
+    
+    {%- for swatch in color_swatches -%}
+
+
+        {% assign swatch_a = swatch | split: ':' -%}
+
+        <a class="swatch ba b--white dib pa1 ma1 ma0 lh-solid pointer {{ swatch_a[0] | handle | prepend: 'swatch-' }}" style="line-height:0;"
+        href='/products/{{swatch_a[1]}}'>
+          <span class="dib w1 ba b--light-gray">
+            <img class="w-100" src="{{ swatch_a[0] | handle | prepend: 'swatch-'| append: '.png' | file_img_url: '24x' }}" onerror="this.parentNode.parentNode.removeChild(this.parentNode)"/>
+    	  </span>
+        </a>
+    
+    	<script class="collection-swatches-scripts">
+          document.addEventListener("DOMContentLoaded", function(){
+            setTimeout(function(){
+              $(this).parents('.grid-swatches').find('a').removeClass('active');$(this).addClass('active');
+                var $this = $(this);
+                $this.parents('.box.product').find('a.product_card').attr('href','/products/{{swatch_a[1]}}');
+                var swatchColor = "{{ swatch_a[0] | handle | prepend: 'swatch-' }}";
+                $.getJSON('/products/{{swatch_a[1]}}.json', function(r){
+                var p = r.product;
+                $this.parents('.box.product').find('.product_card').eq(0).find('img.product_card__image').removeAttr('data-fallback').removeAttr('data-srcset').removeAttr('srcset').attr('src',p.images[0].src);
+                $this.parents('.box.product').find('.product_card').eq(1).find('img.product_card__image').removeAttr('data-fallback').removeAttr('data-srcset').removeAttr('srcset').attr('src',p.images[1].src);
+                $this.parents('.box.product').find('[data-price]').text('$'+p.variants[0].price)
+                $this.parents('.box.product').find('[data-compare]').remove()
+                if(p.variants[0].compare_at_price){
+                  $this.parents('.box.product').find('[data-price]').before('<span data-compare class=\'original-price money\'>$'+p.variants[0].compare_at_price+' </span> ')
+                }
+              }).fail(function(r) {
+                $('.' + swatchColor).remove();
+              });
+            }, 500);  
+          });
+    	</script>
+    
+
+    {%- endfor -%}
+    
+    <!--
+    <a class="w1 ba b--light-gray dib mr3 pa0 ma0 lh-solid" href="{{product.url | within: collection}}" style="line-height:0;">
+        <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+          <polyline points="8,2 8,14" fill="none" stroke="black" />
+          <polyline points="2,8 14,8" fill="none" stroke="black" />
+        </svg>
+    </a>
+	-->
+    
+    {% endcomment %}
+    
+  {%- endif -%}
+  </div>
+<style>
+  .grid-swatches a.active {
+  border-color:#000
+}
+</style>
+
+{% endif %}
+
+<style>
+  .collection_swatches .swatch span {
+    border-radius: 100%;
+  }
+</style>
+
+<script class="metafield-script">
+  // Hide swatches according to device 3 mobile, 4 tablet, 6 desktop
+  
+  document.addEventListener("DOMContentLoaded", function(){
+    
+    for(let el of document.getElementsByClassName("collection_swatches")) {
+      const ndlst = el.querySelectorAll("a.swatch")
+      const toRemove = Math.abs(maxSwatches - ndlst.length)
+      if(ndlst.length >= maxSwatches){
+          for(let i=0; i<=toRemove; i++){
+              el.removeChild(el.children[0])
+          }
+      }
+    }
+    
+  });
+  
+
+  
+  
+</script>

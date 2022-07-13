@@ -1,0 +1,134 @@
+{% assign color_title = product.title | split: '|' | last %}
+<div class="swatches-{{ product.handle }}"> 
+</div>
+<script>
+  console.log({{ product.handle | json}})
+</script>
+{% if template contains 'collection' or template contains 'search' %}
+
+<script class="metafield-script">
+  metafield_swatches.push({
+    product_id: {{ product.id | json }},
+    img_base: 'https://cdn.shopify.com/s/files/1/0102/0923/0929/files/',
+    href : document.location.href,
+    init: function() {
+      $('.swatches-'+{{ product.handle | json }}).empty();
+      var added = this.domAdded;
+      var href = document.location.href
+      var href_a = href.split('/');
+      $('.swatches-'+{{ product.handle | json }}).prepend('<div class="metafields-swatches"><div class="option_title">Color<span>: '+{{ color_title | json }}+'</span></div></div>')
+      
+      Promise.allSettled(this.siblings.map(
+        swatchHandle => $.getJSON('/products/'+ swatchHandle +'.json')
+      )).then(
+        promisesResults => promisesResults.filter(it => it.value).map(result =>{
+            const p = result.value.product;
+            var link = href.replace(href_a[href_a.length - 1],p.handle)
+            var swatch_handle = p.title.split(' | ')[1].toLowerCase().replace(/ /g, "-");
+            var active_class = '';
+            if(href_a[href_a.length - 1] == p.handle || 
+                {{ product.title | json }} == p.title) {
+              active_class = 'active'
+            }
+            $('.swatches-'+ {{ product.handle | json }} +' .metafields-swatches').append(
+                '<div class="swatch-container '+active_class+'">'+
+                    '<label class="pointer swatch-link swatch-'+swatch_handle+'" onclick="window.location = \'/products/' + p.handle +'\';" title="'+p.title.split(' | ')[1]+'">'+
+                        '<img src="https://cdn.shopify.com/s/files/1/0102/0923/0929/files/swatch-'+swatch_handle+'.png" onerror="$(this).after(\''+p.title.split(' | ')[1]+'\');$(this).parent(\'label\').removeClass(\'swatch-link\');$(this).remove()"/>'+
+                    '</label>'+
+                '</div>'
+            );
+            if($('.grid-swatches#{{ product.id }}').find('a.swatch').length + $('.grid-swatches#{{ product.id }}').find('.plus').length < maxSwatches){
+              $('.grid-swatches#{{ product.id }}').append(
+                  '<a class="swatch ba b--white dib pa1 ma1 ma0 lh-solid pointer swatch-'+swatch_handle+'" style="line-height:0;"'+
+                  "href='/products/"+p.handle+"'>"+
+                  '<span class="dib w1 ba b--light-gray">'+
+                  '<img class="w-100" src="https://cdn.shopify.com/s/files/1/0102/0923/0929/files/swatch-'+swatch_handle+'.png" onerror="this.parentNode.parentNode.removeChild(this.parentNode)"/>'+
+                  '</span>'+
+                  '</a>'
+                );
+            } else{
+
+                let removed_one = false;
+                while($(".grid-swatches#{{ product.id }}").find("a.swatch").length >= maxSwatches){
+                    $(".grid-swatches#{{ product.id }}").children().last().remove();
+                    removed_one = true;
+                }
+                if(removed_one) $(".grid-swatches#{{ product.id }}").append("<a href='"+ $(".grid-swatches#{{ product.id }}").find("a.swatch").first().attr('href') +"'><span class='plus'>+</span></a>"); 
+            }
+
+        })
+
+      ).catch(error => console.log(error));
+    },
+    {%- assign color_siblings = product.metafields.siblings.color | split: ',' -%}
+    siblings:[{%- for sibling in color_siblings -%}{{ sibling | json }}{%- unless forloop.last -%},{%- endunless -%}{% endfor %}],
+    products: [
+      {%- for sibling in color_siblings limit: 10 -%}
+        {% assign productJson = all_products[sibling] %}
+        {% if productJson.title != blank %}
+            {{ productJson | json }}{%- unless forloop.last -%},{%- endunless -%}
+        {%  endif %}
+      {%- endfor -%}
+    ]
+  });
+</script>
+
+{% else %}
+
+<script>
+  var swatches = {
+    product_id: {{ product.id | json }},
+    img_base: 'https://cdn.shopify.com/s/files/1/0102/0923/0929/files/',
+    href : document.location.href,
+    init: function() {
+      $('.swatches-'+{{ product.handle | json }}).empty();
+      $('.swatches-'+{{ product.handle | json }}).prepend('<div class="metafields-swatches"><div class="option_title">Color<span>: '+{{ color_title | json }}+'</span></div></div>')
+      const href = document.location.href
+      const href_a = href.split('/');
+      
+      Promise.allSettled(swatches.siblings.map(
+        swatchHandle => $.getJSON('/products/'+ swatchHandle +'.json')
+      )).then(
+        promisesResults => promisesResults.filter(it => it.value).map(result =>{
+            const p = result.value.product;
+            var link = href.replace(href_a[href_a.length - 1],p.handle)
+            // var url_a = document.location.href.split('/')
+            var active_class = '';
+            if(href_a[href_a.length - 1] == p.handle || 
+                {{ product.title | json }} == p.title) {
+              active_class = 'active'
+            }
+
+            $('.swatches-'+ {{ product.handle | json }} +' .metafields-swatches').append(
+                '<div class="swatch-container '+active_class+'">'+
+                    '<label class="pointer swatch-link swatch-'+p.title.split(' | ')[1].toLowerCase().replace(/ /g, "-")+'" onclick="window.location = \'/products/' + p.handle +'\';" title="'+p.title.split(' | ')[1]+'">'+
+                        '<img src="'+swatches.img_base+'swatch-'+p.title.split(' | ')[1].toLowerCase().replace(/ /g, "-")+'.png" onerror="$(this).after(\''+p.title.split(' | ')[1]+'\');$(this).parent(\'label\').removeClass(\'swatch-link\');$(this).remove()"/>'+
+                    '</label>'+
+                '</div>'
+            );
+
+          })
+
+      ).catch(error => console.log(error));
+    },
+    {%- assign color_siblings = product.metafields.siblings.color | split: ',' -%}
+    siblings:[{%- for sibling in color_siblings -%}{{ sibling | json }}{%- unless forloop.last -%},{%- endunless -%}{% endfor %}],
+    {% comment %}
+      
+      products: [
+      {%- for sibling in color_siblings limit: 10 -%}
+        {% assign productJson = all_products[sibling] %}
+        {% if productJson.title != blank %}
+            {{ all_products[sibling] | json }}{%- unless forloop.last -%},{%- endunless -%}
+        {%  endif %}
+      {%- endfor -%}
+    ]
+      
+    {% endcomment %}
+  };
+  window.addEventListener('DOMContentLoaded', swatches.init);
+</script>
+
+{% endif %}
+
+

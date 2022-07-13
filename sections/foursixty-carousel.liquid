@@ -1,0 +1,298 @@
+<section class="foursixty-section container" id="fs_{{section.id}}">
+  <h2 class="title insta center" style="text-align: center;text-transform: none;letter-spacing: 0;margin-bottom:0">
+    <a href="/pages/featured-on-instagram" target="_blank">{{ section.settings.title }}</a>
+  </h2>
+  <p class="center">{{ section.settings.subtitle}}</p>
+	<script 
+        data-track-conversion="true"
+        data-defer-image-loading="true"
+        data-use-app-proxy="true"
+        data-feed-id="{{section.settings.extension}}"
+        data-theme="slider_v2_5"
+        data-cell-size="{{section.settings.desktop_cell_width}}" 
+        src="//foursixty.com/media/scripts/fs.slider.v2.5.js"></script>
+  
+  <script>
+    document.querySelector("script[data-feed-id]").addEventListener("foursixtyAnalyticsEvent", function(e) {    
+      if (e.detail && e.detail.type && e.detail.type.indexOf("AddToCart_Opened") > -1) {
+        var style = document.querySelector(".fs-buy-now-form").getAttribute("data-product-url").split("/")[2].toUpperCase();
+        var selects = document.querySelectorAll(".fs-color > .fs-variant-select, .fs-Color > .fs-variant-select");
+        for (var i = 0,  l = selects.length; i < l; i++) {
+          var select = selects[i];
+          var label = select.querySelector("label");
+          var input = select.querySelector("input");
+          select.setAttribute("style", "border: 1px solid #e2e2e2; border-radius: 50%; padding: 3px;");
+          var name = input.getAttribute("value").replace(/ /g, "-").replace(/%20/g, "-");
+          label.setAttribute("style", "background-image: url(https://cdn.shopify.com/s/files/1/0102/0923/0929/files/" + style + "-" + name.toUpperCase() + ".png?221); background-color: " + name.toLowerCase().replace('new-york-','') + "; padding: 5px; display: block; height: 42px; width: 42px; border-radius: 50%; border: 1px solid #e2e2e2;");
+          label.className += "fs-color-swatch"
+          var labelContent = label.innerText;
+          label.innerHTML = "<span class='fs-swatch-label'>"+labelContent+"</span>";   
+        }
+      }
+    })
+  </script>
+<style>
+  .foursixty-section {
+    padding-top: 30px;
+  }
+.fs-color-swatch {
+  position:relative;
+}
+  input[type=radio]:checked + label.fs-option-label.fs-small-text.fs-color-swatch:before {
+    content: "";
+    height: 48px;
+    width: 48px;
+    /* background: red; */
+    position: absolute;
+    top: -5px;
+    bottom: 0;
+    left: -5px;
+    right: 0;
+    border: 1px solid #585858;
+    border-radius: 100%;
+}
+  
+.fs-add-to-cart-enabled .fs-option:disabled + .fs-option-label.fs-color-swatch::after {
+    position: absolute;
+    content: "";
+    color: white;
+    font-size: 8px;
+    padding: 4px 6px;
+    background-color: transparent;
+    background-image: linear-gradient(to bottom left, transparent 50%, #999 50%, #999 calc(50% + 1px), transparent 50%),linear-gradient(to bottom right, transparent 50%, #999 50%, #999 calc(50% + 1px), transparent 50%);
+    left: -3px;
+    right: -3px;
+    top: -3px;
+    bottom: -3px;
+    margin: auto;
+}
+  
+div.fs-has-links::after {
+  padding: 16px 24px;
+  border: 2px solid rgb(255, 255, 255);
+  color: rgb(255, 255, 255);
+  content: "shop now";
+}
+div.fs-has-links:hover:after {
+  background-color: rgb(255, 255, 255);
+  color: rgba(33, 33, 33, 0.6);
+}
+.fs-wrapper {
+  height: auto;
+}
+.fs-wrapper div.fs-text-container .fs-entry-title,
+div.fs-detail-container .fs-post-info,
+div.fs-detail-title {
+  font-family: Montserrat, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  text-align: left;
+}
+div.fs-text-container .fs-entry-date,
+div.fs-wrapper div.fs-has-links::after,
+.fs-text-product,
+.fs-overlink-text {
+  font-family: Montserrat, sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  text-align: left;
+}
+.fs-wrapper div.fs-text-container * {
+  color: rgb(255, 255, 255);
+}
+.fs-wrapper div.fs-text-container {
+  background-color: rgba(33, 33, 33, 0.6);
+  margin: 0px;
+}
+div.fs-entry-date {
+  display: none;
+}
+div.fs-entry-title {
+  display: none;
+}
+.fs-wrapper div.fs-timeline-entry {
+  margin: 4px;
+}
+.fs-slider-container {
+  overflow: visible;
+}
+.fs-slider-next-button {
+  opacity: 1;
+}
+.fs-slider-prev-button {
+  opacity: 1;
+}
+.fs-detail-shares {
+  text-align: left;
+}
+div.fs-post-info a,
+div.fs-post-info a:link,
+div.fs-post-info a:visited,
+div.fs-post-info a span,
+div.fs-post-info a:visited span,
+div.fs-post-info a:link span {
+  font-size: 14px;
+  text-transform: lowercase;
+  color: #585858;
+}
+.fs-detail-product-image {
+  margin: 10px auto 0;
+}
+
+.fs-shopify-add-cart.fs-shopify-add-cart-container {
+  background-color: rgb(235,235,235);
+  color: #585858;
+  max-width: none;
+  padding: 0 20px;
+  font-size: 10px;
+  min-height: 40px;
+  text-transform: lowercase;
+}
+  
+.fs-add-to-cart-enabled .fs-option-label,
+.fs-add-to-cart-enabled .fs-button-bar .fs-buy-button,
+.fs-add-to-cart-enabled .fs-option-name {
+  text-transform: lowercase;
+}
+.fs-add-to-cart-enabled .fs-option-label {
+  width: 75px;
+  text-align: center; 
+}
+.fs-shopify-add-cart.fs-shopify-add-cart-container:hover {
+  background-color: #cdcdcd;
+  border: 1px solid #cdcdcd;
+}
+.fs-add-to-cart-enabled .fs-shopify-options > div:not(.fs-view) p {
+  padding: 12px 20px !important;
+  background: #fff;
+  letter-spacing: 2px;
+  font-size: 10px !important;
+}
+  .fs-wrapper {
+   	max-width: calc(100% - 120px) !important;
+    margin: 0 auto !important;
+  }
+  
+  .fs-slider-next-button, .fs-slider-prev-button {
+   	display: flex !important;
+    opacity: 1 !important;
+  }
+  
+  .fs-slider-next-button.fs-hidden, .fs-slider-prev-button.fs-hidden {
+    opacity: 0.5 !important;
+  }
+.fs-add-to-cart-enabled .fs-error {
+  background-color: #585858;
+  color: white;
+  display: inline-block;
+  margin: 10px 0;
+}
+.fs-add-to-cart-enabled .fs-buy-now-form:not(.fs-added-notification){
+  max-width: 920px
+}
+.fs-add-to-cart-enabled .fs-view {
+  white-space: normal;
+}
+.fs-add-to-cart-enabled .fs-shopify-options .fs-product-name {
+  color: #454545;
+  font-size: 14px;
+  text-transform: capitalize;
+}
+.fs-add-to-cart-enabled .fs-shopify-options .fs-product-price {
+  color: #2b2a2a;
+  font-size: 14px;
+}
+.fs-add-to-cart-enabled .fs-buy-button {
+  background: #585858;
+  color: #fff;
+}
+.fs-add-to-cart-enabled .fs-buy-now-form, .fs-add-to-cart-enabled .fs-buy-now-form form {
+  color: #585858
+}
+.fs-add-to-cart-enabled .fs-variant-select {
+  border: 1px solid #585858
+}
+a[aria-label="permalink"] {
+  display: none;
+}
+.fs-add-to-cart-enabled .fs-variant-select input[type=radio]:checked + .fs-option-label {
+ background-color: #585858 
+}
+.fs-add-to-cart-enabled .fs-option:disabled + .fs-option-label::after {
+  background-color: #585858
+}
+.fs-overlink-text {
+  background-color: rgba(88,88,88,0.75)
+}
+.fs-arrow-up {
+  border-bottom: 10px solid rgba(88,88,88, 0.75)
+}
+.fs-overlink:hover, div.fs-overlink-active {
+  box-shadow: 0 5px 0px #585858
+}
+.fs-post-info, .fs-link-text, div.fs-detail-title {
+ color: #585858 
+}
+.fs-detail-nav-button .fs-arrow {
+  stroke: #585858
+}
+.fs-swatch-label {
+    position: absolute;
+    left: -100%;
+    right: 100%;
+    bottom: -25px;
+    width: 300%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+.fs-variant-select:hover .fs-swatch-label {
+  opacity: 1;
+  transition: opacity 0.3s;
+}
+@media only screen and (max-width: 768px) {
+  .fs-mobile div.fs-entry-container, 
+  .fs-desktop div.fs-entry-container {
+    height: 0;
+    width: {{section.settings.mobile_cell_width}} !important;
+    padding-top: {{section.settings.mobile_cell_width}} !important;
+  }
+}
+{{ section.settings.css }}
+</style>
+</section>
+{% schema %}
+{
+  "name": "Foursixty",
+  "settings": [
+    { "type": "text", "id": "title", "default": "Like it on Instagram. Get the look", "label": "Title" },
+    { "type": "text", "id": "subtitle", "default": "Share your looks with #wearethreedots and tag us @shopthreedots for a chance to be featured.", "label":"Subtitle"},
+    { "type": "text", "id": "extension", "default": "_", "label": "Foursixty Extension" },
+    { "type": "select", "id": "desktop_cell_width", "label": "Pictures across (desktop)", "default": "25%", "options": [
+      {"value": "50%", "label": "two"},
+      {"value": "33.334%", "label": "three"},
+      {"value": "25%", "label": "four"},
+      {"value": "20%", "label": "five"},
+      {"value": "16.666%", "label": "six"},
+      {"value": "14.2857%", "label": "seven"}
+    ]},
+    { "type": "select", "id": "mobile_cell_width", "label": "Pictures across (mobile)", "default": "50%", "options": [
+      {"value": "100%", "label": "one"},
+      {"value": "50%", "label": "two"},
+      {"value": "33.333%", "label": "three"}
+    ]},
+    {
+    "type": "text",
+    "id": "css",
+    "label": "Customization CSS"
+    }
+    ],
+    "presets": [{
+      "name": "Front Page Slider",
+      "category": "Foursixty"
+  }]
+}
+{% endschema %}

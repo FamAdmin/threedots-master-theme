@@ -1,0 +1,276 @@
+{% comment %}
+** Featured promotions - homepage partial **
+- Draggable section
+- Uses blocks
+{% endcomment %}
+
+{% assign featured_promos_per_row = section.settings.featured_promos_per_row | minus: 0 %}
+{% assign title_on_image = section.settings.promo_text_on_image_enabled %}
+
+{% comment %}{% if section.blocks.size > 0 and section.blocks.size <= 2 %}
+  <div class="featured-promotions container full-width--{{ section.settings.featured_promos_grid }}">
+    <div  class="js-featured-promotions promo-per-row-{{ featured_promos_per_row }} clearfix"
+          data-promo-animation="{{ section.settings.featured_links_animation }}">
+        {% for block in section.blocks %}
+          <figure class="feature-section section-{{ forloop.index }} promo-{{ forloop.index }} title-overlay-{{ title_on_image }} {% if section.settings.featured_links_animation != blank %}promo-animation--true{% endif %}" {{ block.shopify_attributes }}>
+              <div class="feature-inner feature-style--{{ section.settings.feature_style }} ">
+                <a href="{{ block.settings.link }}">
+                  {% if block.settings.image != nil %}
+                    {% include 'image-element', image: block.settings.image, alt: block.settings.image.alt, stretch_width: true %}
+                  {% else %}
+                    {% capture i %}{% cycle "1", "2", "3", "4", "5", "6" %}{% endcapture %}
+                    {{ 'collection-' | append: i | placeholder_svg_tag: 'placeholder-svg placeholder-svg--promotions' }}
+                  {% endif %}
+                </a>
+                {% if block.settings.text != blank or block.settings.button_label != blank or block.settings.title != blank and title_on_image != blank %}
+                  <figcaption class="feature-overlay">
+                    <a {% if block.settings.link != blank %}href="{{ block.settings.link }}"{% endif %}class="link-promo"></a>
+                      <div class="feature-wrap">
+                        {% if block.settings.title != blank %}
+                          <h2 class="title">{{ block.settings.title }}</h2>
+                        {% endif %}
+                        <div class="feature-details">
+                          {% if block.settings.text != blank %}
+                            <div class="description">{{ block.settings.text }}</div>
+                          {% endif %}
+
+                          {% if block.settings.button_label != blank %}
+                            <div class="button">{{ block.settings.button_label }}</div>
+                          {% endif %}
+                        </div>
+                      </div>
+                  </figcaption>
+                {% elsif block.settings.link != blank %}
+                  <a {% if block.settings.link != blank %}href="{{ block.settings.link }}"{% endif %}class="link-promo"></a>
+                {% endif %}
+              </div>
+          </figure>
+        {% endfor %}
+    </div>
+  </div>
+{% endif %}{% endcomment %}
+
+{% if section.blocks.size == 3 %}
+	
+  <div class="featured-promotions container full-width--{{ section.settings.featured_promos_grid }}">
+    <div  class="js-featured-promotions promo-per-row-{{ featured_promos_per_row }} clearfix"
+          data-promo-animation="{{ section.settings.featured_links_animation }}">
+        {% for block in section.blocks %}
+      		{% assign mod = forloop.index | modulo: 2 %}
+      
+   			 {% if mod == 0 %}
+      			<!-- even -->
+                <figure class="feature-section section-{{ forloop.index }} promo-{{ forloop.index }} title-overlay-{{ title_on_image }} {% if section.settings.featured_links_animation != blank %}promo-animation--true{% endif %}" {{ block.shopify_attributes }}>
+                    {% if block.settings.text != blank %}
+                       <div class="description even-top">{{ block.settings.text }}</div>
+                    {% endif %}
+                    {% if block.settings.title != blank and title_on_image != blank %}
+                         <div class="feature-wrap even even-top">
+                              {% if block.settings.title != blank %}
+                                <h2 class="title"> 
+                                  	<a href="{{ block.settings.link }}">{{ block.settings.title }}</a>
+                                  </h2>
+                              {% endif %}
+                            </div>
+                       {% endif %}
+                  <div class="feature-inner feature-style--{{ section.settings.feature_style }} ">
+                    <a href="{{ block.settings.link }}">
+                      {% if block.settings.image != nil %}
+                        {% include 'image-element', image: block.settings.image, alt: block.settings.image.alt, stretch_width: true %}
+                      {% else %}
+                        {% capture i %}{% cycle "1", "2", "3", "4", "5", "6" %}{% endcapture %}
+                        {{ 'collection-' | append: i | placeholder_svg_tag: 'placeholder-svg placeholder-svg--promotions' }}
+                      {% endif %}
+                    </a>
+                    </div>
+                  	{% if block.settings.text != blank %}
+                       <div class="description even-bottom">{{ block.settings.text }}</div>
+                    {% endif %}
+                    {% if block.settings.title != blank %}
+                         <div class="feature-wrap even even-bottom">
+                              {% if block.settings.title != blank %}
+                           		  <h2 class="title">
+                                    <a href="{{ block.settings.link }}">{{ block.settings.title }}</a>
+                                  </h2>
+                              {% endif %}
+                            </div>
+                       {% endif %}
+              	</figure>
+   
+      		{% else %}
+      		<!-- odd -->
+      			<figure class="feature-section section-{{ forloop.index }} promo-{{ forloop.index }} title-overlay-{{ title_on_image }} {% if section.settings.featured_links_animation != blank %}promo-animation--true{% endif %}" {{ block.shopify_attributes }}>
+                   <div class="feature-inner feature-style--{{ section.settings.feature_style }} ">
+                     <a href="{{ block.settings.link }}">
+                      {% if block.settings.image != nil %}
+                        {% include 'image-element', image: block.settings.image, alt: block.settings.image.alt, stretch_width: true %}
+                      {% else %}
+                        {% capture i %}{% cycle "1", "2", "3", "4", "5", "6" %}{% endcapture %}
+                        {{ 'collection-' | append: i | placeholder_svg_tag: 'placeholder-svg placeholder-svg--promotions' }}
+                      {% endif %}
+                     </a>
+                    </div>
+                  	{% if block.settings.title != blank and title_on_image != blank %}
+                         <div class="feature-wrap odd">
+                              {% if block.settings.title != blank %}
+                                  <h2 class="title odd">
+                                     <a href={{ block.settings.link }}>{{ block.settings.title }}</a>
+								</h2>
+                              {% endif %}
+                            </div>
+                     {% endif %}
+              </figure>
+      
+      		{% endif %}
+          {% endfor %}
+      	
+       
+    </div>
+  </div>
+{% endif %}
+
+
+
+
+
+
+<style>
+.featured-promotions .feature-section:hover .feature-overlay {
+  background: transparent;
+}
+.featured-promotions .feature-section .feature-details {
+  display: block !important;
+  opacity: 1;
+}
+.featured-promotions .feature-section .feature-wrap {
+/*   top: 75%; */
+}
+.featured-promotions .feature-section .feature-details .button {
+  background: transparent;
+  color: #fff;
+  border: 2px solid #fff;
+  width: 182px;
+  text-transform: lowercase;
+}
+
+
+</style>
+
+{% schema %}
+{
+  "name": "Featured promotions",
+  "class": "featured-promotions-section",
+  "max_blocks": 8,
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "featured_promos_grid",
+      "label": "Wide display",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "promo_text_on_image_enabled",
+      "label": "Show title on image",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "featured_promos_per_row",
+      "label": "Promotions per row",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "type": "select",
+      "id": "featured_links_animation",
+      "label": "Promotions animation",
+      "options": [
+        {
+          "value": "fadeIn",
+          "label": "Fade In"
+        },
+        {
+          "value": "fadeInUp",
+          "label": "Fade Up"
+        },
+        {
+          "value": "fadeInDown",
+          "label": "Fade Down"
+        },
+        {
+          "value": "",
+          "label": "None"
+        }
+      ],
+      "default": "fadeInDown"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "image",
+      "name": "Promotion",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image",
+          "info": "840 x 840px recommended"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Link title",
+          "default": "Feature"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "<p>Promotion description details.</p>"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button label"
+        }
+      ]
+    }
+  ],
+  "presets": [{
+    "name": "Featured promotions",
+    "category": "Image",
+    "settings": {
+      "featured_promos_grid": true
+    },
+    "blocks": [
+      {
+        "type": "image",
+        "settings": {
+
+        }
+      },
+      {
+        "type": "image",
+        "settings": {
+
+        }
+      },
+      {
+        "type": "image",
+        "settings": {
+
+        }
+      }
+    ]
+  }]
+}
+
+{% endschema %}

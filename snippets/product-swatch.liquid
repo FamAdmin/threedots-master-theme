@@ -1,0 +1,71 @@
+{% comment %}
+  Set the extension of your color files below. Use 'png', 'jpeg', 'jpg' or 'gif'.
+{% endcomment %}
+
+{% assign file_extension = 'png' %}
+
+{% assign swatch = product-swatch %}
+{% assign found_option = false %}
+{% assign is_color = false %}
+{% assign option_index = 0 %}
+
+{% for option in product.options %}
+  {% if option == swatch %}
+    {% assign found_option = true %}
+    {% assign option_index = forloop.index0 %}
+    {% assign downcased_option = swatch | downcase %}
+    {% if downcased_option contains 'color' or downcased_option contains 'colour' %}
+      {% assign is_color = true %}
+    {% endif %}
+  {% endif %}
+{% endfor %}
+
+<div class="swatch clearfix" data-option-index="{{ option_index }}">
+  <div class="option_title">{{ swatch }}</div>
+  {% assign values = '' %}
+  {% for variant in product.variants %}
+    {% assign value = variant.options[option_index] %}
+    {% if variant.inventory_quantity %}
+      {% unless variant.featured_image == null %}
+        {% unless values contains value %}
+          {% assign values = values | join: ',' %}
+          {% assign values = values | append: ',' | append: value %}
+          {% assign values = values | split: ',' %}
+
+          <input  id="swatch-{{ option_index }}-{{ value | handle }}-{{ product.id }}{% if section.id %}-{{ section.id }}{% endif %}" type="radio" name="option-{{ option_index }}" value="{{ value | escape }}"{% if forloop.first %} checked{% endif %} />
+          <div data-value="{{ value | escape }}" data-id="{{ variant.id }}" class="swatch-element {% if is_color %}color {% endif %}{{ value | handle }}-swatch {% if variant.available %}available{% else %}soldout{% endif %}">
+            {% if is_color %}
+              <div class="tooltip">{{ value }}</div>
+            {% endif %}
+            {% if is_color %}
+              <!-- <label for="swatch-{{ option_index }}-{{ value | handle }}-{{ product.id }}{% if section.id %}-{{ section.id }}{% endif %}" style="background-image: url({{ value | handle | append: '.' | append: file_extension | asset_img_url: '50x' | prepend: 'https:' }}); background-color: {{ value | split: ' ' | last | handle }};">
+                <img class="crossed-out" src="{{ 'soldout.png' | asset_url }}"/>
+              </label> -->
+
+              {% for variant in product.variants %}
+                <!-- TODO: color swatch replacement -->
+                {% assign variantColor = variant.option1 | replace: '/ ', ' ' | replace: '/', ' ' | replace: '  ', ' ' | replace: ' ', '-' | replace: "'", "" | upcase %}
+                {% assign styleNumber = product.handle | upcase %}
+                {% if variant.option1 == value %}
+
+                    {% assign variantImage = variant.featured_image.src %}
+                    <label data-index="{{forloop.index}}" for="swatch-{{ option_index }}-{{ value | handle }}-{{ product.id }}{% if section.id %}-{{ section.id }}{% endif %}" style="background-image: url(https://cdn.shopify.com/s/files/1/0102/0923/0929/files/{{styleNumber}}-{{variantColor}}.png?221); background-color: {{ value | split: ' ' | last | handle }};">
+                      <span class="crossed-out"></span>
+                    </label>
+
+                  {% break %}
+                {% endif %}
+              {% endfor %}
+            {% else %}
+              <label data-index="{{forloop.index}}" for="swatch-{{ option_index }}-{{ value | handle }}-{{ product.id }}{% if section.id %}-{{ section.id }}{% endif %}">
+                {{ value }}
+                <img class="crossed-out" src="{{ 'soldout.png' | asset_url }}"/>
+              </label>
+            {% endif %}
+          </div>
+        {% endunless %}
+
+      {% endunless %}
+    {% endif %}
+  {% endfor %}
+</div>

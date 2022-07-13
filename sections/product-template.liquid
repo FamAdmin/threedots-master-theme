@@ -1,0 +1,1018 @@
+{% comment %}
+** Product - default view **
+- Product template
+{% endcomment %}
+
+{% assign product_title = product.title | split: '|' | first %}
+
+<a name="pagecontent" id="pagecontent"></a>
+
+<div class="container main content product-name--{{ product.handle }}">
+
+  <div class="sixteen columns">
+    {% if collection.previous_product or collection.next_product or section.settings.product_breadcrumb %}
+      <div class="clearfix breadcrumb-collection">
+        {% if collection.previous_product or collection.next_product %}
+          <div class="nav_arrows breadcrumb_text">
+            {% if collection.previous_product %}
+              <a href="{{ collection.previous_product }}" title="{{ 'products.general.previous_product_html' | t }}" class="breadcrumb_link"><span class="icon-left-arrow"> {{ 'products.general.previous_product_html' | t }}</span></a>
+            {% endif %}
+            {% if collection.previous_product and collection.next_product %}<span class="breadcrumb-divider"> | </span>{% endif %}
+
+            {% if collection.next_product %}
+              <a href="{{collection.next_product}}" title="{{ 'products.general.next_product_html' | t }}" class="breadcrumb_link">{{ 'products.general.next_product_html' | t }} <span class="icon-right-arrow"></span></a>
+            {% endif %}
+          </div>
+        {% endif %}
+
+        {% if section.settings.product_breadcrumb %}
+          <div class="breadcrumb_text" itemscope itemtype="http://schema.org/BreadcrumbList">
+            <span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+              <a href="{{ shop.url }}" title="{{ shop.name | escape }}" itemprop="item" class="breadcrumb_link">
+                <span itemprop="name">{{ 'general.breadcrumbs.home' | t }}</span>
+              </a>
+              <meta itemprop="position" content="1" />
+            </span>
+            <span class="breadcrumb-divider">/</span>
+            <span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+              {% if collection %}
+                <a href="{{ collection.url }}" title="{{ collection.title | escape }}" itemprop="item" class="breadcrumb_link">
+                  <span itemprop="name">{{ collection.title }}</span>
+                  <meta itemprop="position" content="2" />
+                  </a>
+              {% else %}
+                <a href="/collections/all" title="{{ collections.all.title }}" itemprop="item" class="breadcrumb_link">
+                  <span itemprop="name">{{ collections.all.title }}</span>
+                  <meta itemprop="position" content="2" />
+                  </a>
+              {% endif %}
+            </span>
+            <span class="breadcrumb-divider">/</span>
+            <span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+              <a href="{{ product.url }}" itemprop="item" class="breadcrumb_link">
+                <span itemprop="name">{{ product.title }}</span>
+                <meta itemprop="position" content="3" />
+              </a>
+            </span>
+          </div>
+        {% endif %}
+      </div>
+    {% endif %}
+  </div>
+
+  {% comment %}Check to see if sidebar should be enabled{% endcomment %}
+  {% if section.blocks.size > 0 %}
+    {% assign sidebar = true %}
+  {% else %}
+    {% assign sidebar = false %}
+  {% endif %}
+
+  <div class="product clearfix">
+    {% if sidebar %}
+      {% include 'sidebar' %}
+      <div class="twelve columns medium-down--one-whole sidebar--{{ sidebar }}">
+    {% else %}
+      <div class="sixteen columns">
+    {% endif %}
+
+    <div  class="product-{{ product.id }}"
+          data-free-text="{{ settings.free_price_text }}"
+          >
+      <div class="section product_section clearfix js-product_section {% if section.settings.product_images_position == 'right' %}align_right--images{% endif %}" itemscope itemtype="http://schema.org/Product" data-rv-handle="{{ product.handle }}">
+
+        <div class="nine columns medium-down--one-whole {% if section.settings.product_images_position == 'left' %}alpha{% else %}omega{% endif %}">
+          {% include 'product-images' %}
+        </div>
+
+        <div class="seven columns medium-down--one-whole  {% if section.settings.product_images_position == 'left' %}omega{% else %}alpha{% endif %}">
+
+          {% assign collection_handles = product.collections | map: 'handle' %}
+          {% assign variant = product.selected_or_first_available_variant %}
+
+          {% if product.available %}
+            {% if settings.sale_banner_enabled and product.compare_at_price_max > product.price %}
+              <div class="sale_banner_product">{{ 'collections.general.sale' | t }}</div>
+            {% endif %}
+          {% endif %}
+          {% if collection_handles contains 'new' %}
+            <div class="new_banner_product">{{ 'collections.general.new' | t }}</div>
+          {% endif %}
+          {% if collection_handles contains 'pre-order' %}
+            <div class="preorder_banner_product">{{ 'collections.general.pre_order' | t }}</div>
+          {% endif %}
+
+           {% if section.settings.display_vendor %}
+            <p class="vendor">
+              <span itemprop="brand" class="vendor">{{ product.vendor | link_to_vendor }}</span>
+            </p>
+          {% endif %}
+
+          {% if variant.sku != blank and section.settings.display_sku %}
+            <p class="sku">
+              <span itemprop="sku">{{ variant.sku }}</span>
+            </p>
+          {% endif %}
+          <h1 class="product_name" itemprop="name">{{ product_title }}</h1>
+          {% if section.settings.enable_shopify_product_badges and settings.enable_shopify_review_comments %}
+            <span class="shopify-product-reviews-badge" data-id="{{ product.id }}"></span>
+          {% endif %}
+          <div class="feature_divider"></div>
+
+
+
+          <!-- {% assign product_tags = product.tags | join: ' ' %}
+          {% if product_tags contains 'meta-size-chart-' %}
+            {% for tag in product.tags %}
+              {% if tag contains 'meta-size-chart-' %}
+                <a href="javascript:;" class="size_chart" data-fancybox data-src="#size-chart{{product.id}}" data-type="inline" data-no-instant>{{ 'products.product.size_chart' | t }} <span class="icon-right-arrow"></span></a>
+                {% include 'popup-size-chart', product_id: product.id %}
+              {% endif %}
+            {% endfor %}
+          {% elsif settings.size_chart != blank %}
+            <a href="javascript:;" class="size_chart" data-fancybox data-src="#size-chart{{product.id}}" data-type="inline" data-no-instant>{{ 'products.product.size_chart' | t }} <span class="icon-right-arrow"></span></a>
+          {% endif %} -->
+
+
+          {% if collection_handles contains 'coming-soon' %}
+            <p class="modal_price">{{ 'collections.general.coming_soon' | t }}</p>
+          {% else %}
+            <p class="modal_price" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+              <meta itemprop="priceCurrency" content="{{ shop.currency }}" />
+              <meta itemprop="seller" content="{{ shop.name | escape }}" />
+              <link itemprop="availability" href="http://schema.org/{% if variant.available %}InStock{% else %}OutOfStock{% endif %}">
+              <meta itemprop="itemCondition" itemtype="http://schema.org/OfferItemCondition" content="http://schema.org/NewCondition"/>
+
+              <span class="sold_out">{% if variant.available == false %}{{ 'products.product.sold_out' | t }}{% endif %}</span>
+              <span itemprop="price" content="{{ variant.price | money_without_currency | remove: "," }}" class="{% if variant.compare_at_price > variant.price %}sale{% endif %}">
+                <span class="current_price {% if product.available == false %}hidden{% endif %}">
+                  {% if variant.price > 0 %}
+                    <span class="money">{{ variant.price | money }}</span>
+                  {% else %}
+                    {{ settings.free_price_text }}
+                  {% endif %}
+                </span>
+              </span>
+
+              <span class="was_price">
+                {% if variant.price < variant.compare_at_price and variant.available %}
+                  <span class="money">{{ variant.compare_at_price | money }}</span>
+                {% endif %}
+              </span>
+
+              {% comment %}{% if section.settings.display_savings %}
+                <span class="sale savings">
+                  {% if variant.price < variant.compare_at_price and variant.available %}
+                    {{ 'products.product.savings' | t }}  {{ variant.compare_at_price | minus: variant.price | times: 100 | divided_by: variant.compare_at_price }}% (<span class="money">{{ variant.compare_at_price | minus: variant.price | money }}</span>)
+                  {% endif %}
+                </span>
+              {% endif %}{% endcomment %}
+            </p>
+
+            {% include 'product-notify-me' %}
+          {% endif %}
+          <div class="klarna_code_3dt"></div>
+
+          {% if section.settings.product_description_position == "top" %}
+            {% if product.description != blank %}
+             <div class="description" itemprop="description">
+               {{ product.description | split: '<!-- split -->' | first }}
+             </div>
+           {% endif %}
+          {% endif %}
+
+          {% unless collection_handles contains 'coming-soon' %}
+            {% include 'product-form' with 'product' %}
+          {% endunless %}
+
+          <div class="size_chart_wrapper">
+          {% assign product_tags = product.tags | join: ' ' %}
+          {% if product_tags contains 'meta-size-chart-' %}
+            {% for tag in product.tags %}
+              {% if tag contains 'meta-size-chart-' %}
+
+                <a href="javascript:;" class="size_chart" data-fancybox data-src="#size-chart{{product.id}}" data-type="inline" data-no-instant>{{ 'products.product.size_chart' | t }} <span class="icon-right-arrow"></span></a>
+                {% include 'popup-size-chart', product_id: product.id %}
+
+              {% endif %}
+            {% endfor %}
+          {% elsif settings.size_chart != blank %}
+            <a href="javascript:;" class="size_chart" data-fancybox data-src="#size-chart{{product.id}}" data-type="inline" data-no-instant>{{ 'products.product.size_chart' | t }} <span class="icon-right-arrow"></span></a>
+          {% endif %}
+          </div>
+
+
+          {% if section.settings.product_description_position == "bottom" %}
+            {% if product.description != blank %}
+             <div class="description bottom" itemprop="description">
+              {{ product.description | split: '<!-- split -->' | first }}
+             </div>
+            {% endif %}
+          {% endif %}
+
+          {% if section.settings.review_position == "next_to_gallery" %}
+            <div class="shopify-reviews reviewsVisibility--{{settings.enable_shopify_review_comments}}">
+              <div id="shopify-product-reviews" data-id="{{product.id}}">{{ product.metafields.spr.reviews }}</div>
+            </div>
+          {% endif %}
+
+          {% if section.settings.display_collections or section.settings.display_tags or section.settings.display_type %}
+            <div class="product_links">
+              {% if section.settings.display_collections %}
+                <p>
+                  <span class="label">{{ 'products.product.collections' | t }}:</span>
+                  <span>
+                   {% for col in product.collections %}
+                     <a href="{{ col.url }}" title="{{ col.title }}">{{ col.title }}</a>{% unless forloop.last %},{% endunless %}
+                   {% endfor %}
+                  </span>
+                </p>
+              {% endif %}
+
+              {% if section.settings.display_type %}
+                <p>
+                  <span class="label">{{ 'products.product.product_types' | t }}:</span>
+                  <span>{{ product.type | link_to_type }}</span>
+                </p>
+              {% endif %}
+
+              {% if section.settings.display_tags %}
+                <p>
+                 {% for tag in product.tags %}
+                   {% if forloop.first %}
+                     <span class="label">{{ 'products.product.tags' | t }}:</span>
+                   {% endif %}
+
+                   {% unless tag contains 'meta-' %}
+                     <span>
+                       <a href="/collections/{% if collection %}{{ collection.handle }}{% else %}all{% endif %}/{{ tag | handle }}" title="{{ 'products.product.products_tagged' | t: tag: tag }}">{{ tag }}</a>{% unless forloop.last %},{% endunless %}
+                       </span>
+                   {% endunless %}
+                 {% endfor %}
+                </p>
+              {% endif %}
+            </div>
+          {% endif %}
+
+          <div class="meta">
+            {% if section.settings.display_social_buttons %}
+              {% include "social-buttons" with "product" %}
+            {% endif %}
+          </div>
+        </div>
+      </div>
+
+      {% if product.description contains "<!-- split -->"  %}
+        <br class="clear" />
+        <div class="section clearfix">
+          <div class="description">
+            {{ product.description | split: '<!-- split -->' | last }}
+          </div>
+        </div>
+      {% endif %}
+
+      {% if section.settings.review_position == "below_gallery" %}
+        <div class="shopify-reviews reviewsVisibility--{{settings.enable_shopify_review_comments}}">
+          <div id="shopify-product-reviews" data-id="{{product.id}}">{{ product.metafields.spr.reviews }}</div>
+        </div>
+      {% endif %}
+    </div>
+
+    {% if sidebar %}
+
+            {% if section.settings.display_related_products %}
+              {% include 'include-related-products' %}
+            {% endif %}
+            {% if section.settings.display_recently_viewed %}
+              {% include 'include-recently-viewed' %}
+            {% endif %}
+
+          </div>
+        </div>
+      </div>
+
+    {% else %}
+
+          </div>
+        </div>
+      </div>
+
+      <!-- start Recomatic code -->
+
+       {% comment %}<!--<div id="recomatic-asset-url" data-value="https://cdn.shopify.com/s/files/1/0102/0923/0929/files/color.png?221"></div>
+      <style type="text/css">.recomatic-product-wrap { display: none; }</style>
+      <div style='clear:both'></div>
+     	<div class="recomatic-related-products container main content">
+        <div class="sixteen columns">
+          <div class="related-products__title "><h4 class="title center">You May Also Like</h4><div class="feature_divider"></div></div>
+          <div recomatic="product" shop="{{shop.permanent_domain}}" product_id="{{product.id}}"></div>
+        </div>
+      </div>-->{% endcomment %}
+
+      <!-- end Recomatic code -->
+
+      {% if section.settings.display_related_products %}
+        {% include 'include-related-products' %}
+      {% endif %}
+      {% if section.settings.display_recently_viewed %}
+        {% include 'include-recently-viewed' %}
+      {% endif %}
+
+    {% endif %}
+
+    <style>
+      .swatch-element.color, .swatch-element.color label {
+        border-radius: 100%;
+      }
+    </style>
+
+<div class="fs-product-gallery" id="fs-product-gallery" style="display:none">
+<h2 class="title insta center" style="text-align: center;text-transform: none;letter-spacing: 0;"> <a href="/pages/instashop" target="_blank">Styled on Instagram</a></h2>
+<br>
+	<div id="fsContainer"></div>
+    <script>
+      var fsMinPosts = 4;
+      var fsSettings = {
+        "data-theme": "slider_v2_5",
+        "data-feed-id": "three-dots_1",
+        "data-page-size": "8",
+        "data-cell-size": "25%",
+        "data-for-url" : "true",
+        "data-use-app-proxy":"true",
+        "data-has-posts-selector":"#fs-product-gallery"
+        
+      }
+      
+      function foursixtyInitWithCallback(type, attrs, callback) {
+        var elem = document.getElementById("fsContainer");
+        var fsScript = document.createElement("script");
+        elem.innerHTML = "";
+        fsScript.src = "//foursixty.com/media/scripts/fs." + type + ".v2.5.js";
+        // console.log(fsScript.src, attrs);
+        for (var k in attrs) {
+          fsScript.setAttribute(k, attrs[k]);
+        }
+        fsScript.addEventListener("foursixtyPageRendered", callback);
+        elem.appendChild(fsScript);
+      }
+
+      document.addEventListener("DOMContentLoaded", function() {
+        foursixtyInitWithCallback(
+          "slider",
+          fsSettings,
+          function(event) {
+            if (event.detail.length < fsMinPosts) {
+				document.getElementById("fsContainer").classList.add('fs-notfull')
+            };
+          })
+        
+  document.querySelector("script[data-feed-id]").addEventListener("foursixtyAnalyticsEvent", function(e) {    
+    if (e.detail && e.detail.type && e.detail.type.indexOf("AddToCart_Opened") > -1) {
+      var style = document.querySelector(".fs-buy-now-form").getAttribute("data-product-url").split("/")[2].toUpperCase();
+      var selects = document.querySelectorAll(".fs-color > .fs-variant-select, .fs-Color > .fs-variant-select");
+      for (var i = 0,  l = selects.length; i < l; i++) {
+        var select = selects[i];
+        var label = select.querySelector("label");
+        var input = select.querySelector("input");
+        select.setAttribute("style", "border: 1px solid #e2e2e2; border-radius: 50%; padding: 3px;");
+        var name = input.getAttribute("value").replace(/ /g, "-").replace(/%20/g, "-");
+        label.setAttribute("style", "background-image: url(https://cdn.shopify.com/s/files/1/0102/0923/0929/files/" + style + "-" + name.toUpperCase() + ".png?221); background-color: " + name.toLowerCase().replace('new-york-','') + "; padding: 5px; display: block; height: 42px; width: 42px; border-radius: 50%; border: 1px solid #e2e2e2;");
+        label.className += "fs-color-swatch"
+        var labelContent = label.innerText;
+        label.innerHTML = "<span class='fs-swatch-label'>"+labelContent+"</span>"; 
+      }
+    }
+  })
+       
+      })
+    </script>
+<style>
+.fs-color-swatch {
+  position:relative;
+}
+  input[type=radio]:checked + label.fs-option-label.fs-small-text.fs-color-swatch:before {
+    content: "";
+    height: 48px;
+    width: 48px;
+    /* background: red; */
+    position: absolute;
+    top: -5px;
+    bottom: 0;
+    left: -5px;
+    right: 0;
+    border: 1px solid #222;
+    border-radius: 100%;
+}
+  
+.fs-add-to-cart-enabled .fs-option:disabled + .fs-option-label.fs-color-swatch::after {
+    position: absolute;
+    content: "";
+    color: white;
+    font-size: 8px;
+    padding: 4px 6px;
+    background-color: transparent;
+    background-image: linear-gradient(to bottom left, transparent 50%, #999 50%, #999 calc(50% + 1px), transparent 50%),linear-gradient(to bottom right, transparent 50%, #999 50%, #999 calc(50% + 1px), transparent 50%);
+    left: -3px;
+    right: -3px;
+    top: -3px;
+    bottom: -3px;
+    margin: auto;
+}
+
+.fs-product-gallery {
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.fs-wrapper {
+  max-width: calc(100% - 120px) !important;
+  margin: 0 auto !important;
+  text-align: center;
+  height: auto;
+}
+.fs-entry-container {
+  height: 0 !important;
+  width: 25% !important;
+  padding-top: 25% !important;
+}
+.fs-has-links::after {
+  padding: 16px 24px;
+  border: 2px solid rgb(255, 255, 255);
+  color: rgb(255, 255, 255);
+  content: "shop now";
+}
+.fs-has-links:hover:after {
+  background-color: rgb(255, 255, 255);
+  color: rgba(33, 33, 33, 0.6);
+}
+.fs-wrapper div.fs-text-container .fs-entry-title,
+div.fs-detail-container .fs-post-info,
+div.fs-detail-title {
+  font-family: Montserrat, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  text-align: left;
+}
+div.fs-text-container .fs-entry-date,
+div.fs-wrapper div.fs-has-links::after,
+.fs-text-product,
+.fs-overlink-text {
+  font-family: Montserrat, sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  text-align: left;
+}
+.fs-wrapper div.fs-text-container * {
+  color: rgb(255, 255, 255);
+}
+.fs-wrapper div.fs-text-container {
+  background-color: rgba(33, 33, 33, 0.6);
+  margin: 0px;
+}
+div.fs-entry-date {
+  display: none;
+}
+div.fs-entry-title {
+  display: none;
+}
+.fs-wrapper div.fs-timeline-entry {
+  margin: 4px;
+}
+.fs-shopify-add-cart.fs-shopify-add-cart-container {
+  background-color: rgb(235, 235, 235);
+  color: #585858;
+  max-width: none;
+  padding: 0 20px;
+  font-size: 10px;
+  min-height: 40px;
+  text-transform: lowercase;
+}
+.fs-add-to-cart-enabled .fs-option-label,
+.fs-add-to-cart-enabled .fs-button-bar .fs-buy-button,
+.fs-add-to-cart-enabled .fs-option-name {
+  text-transform: lowercase;
+}
+.fs-add-to-cart-enabled .fs-option-label {
+  width: 75px;
+  text-align: center; 
+}
+.fs-shopify-add-cart.fs-shopify-add-cart-container:hover {
+  background-color: #cdcdcd;
+  border: 1px solid #cdcdcd;
+}
+.fs-add-to-cart-enabled .fs-shopify-options > div:not(.fs-view) p {
+  padding: 12px 20px !important;
+  background: #fff;
+  letter-spacing: 2px;
+  font-size: 10px !important;
+}
+
+.fs-slider-next-button,
+.fs-slider-prev-button {
+  display: flex !important;
+  opacity: 1 !important;
+}
+.fs-slider-next-button.fs-hidden,
+.fs-slider-prev-button.fs-hidden {
+  opacity: 0.5 !important;
+}
+.fs-notfull .fs-slider-next-button.fs-hidden,
+.fs-notfull .fs-slider-prev-button.fs-hidden {
+  opacity: 0 !important;
+}
+.fs-detail-product-image {
+  margin: 10px auto 0;
+}
+
+.fs-wrapper div.fs-entry-container {
+  width: calc(100% / 4) !important;
+  padding-top: calc(100% / 4) !important;
+}
+
+.fs-detail-shares {
+  text-align: left;
+}
+.fs-add-to-cart-enabled .fs-error {
+  background-color: #585858;
+  color: white;
+  display: inline-block;
+  margin: 10px 0;
+}
+.fs-add-to-cart-enabled .fs-buy-now-form:not(.fs-added-notification){
+  max-width: 920px
+}
+  .fs-add-to-cart-enabled .fs-view {
+  white-space: normal;
+}
+div.fs-post-info a,
+div.fs-post-info a:link,
+div.fs-post-info a:visited,
+div.fs-post-info a span,
+div.fs-post-info a:visited span,
+div.fs-post-info a:link span {
+  font-size: 14px;
+  text-transform: lowercase;
+  color: #585858;
+}
+.fs-add-to-cart-enabled .fs-shopify-options .fs-product-name {
+  color: #454545;
+  font-size: 14px;
+  text-transform: capitalize;
+}
+.fs-add-to-cart-enabled .fs-shopify-options .fs-product-price {
+  color: #2b2a2a;
+  font-size: 14px;
+}
+@media only screen and (max-width: 768px) {
+  .fs-wrapper div.fs-entry-container {
+    width: 100% !important;
+    padding-top: 100% !important;
+  }
+}
+a[aria-label="permalink"] {
+  display: none;
+}
+.fs-add-to-cart-enabled .fs-variant-select input[type=radio]:checked + .fs-option-label {
+ background-color: #585858 
+}
+.fs-add-to-cart-enabled .fs-option:disabled + .fs-option-label::after {
+  background-color: #585858
+}
+.fs-overlink-text {
+  background-color: rgba(88,88,88,0.75)
+}
+.fs-arrow-up {
+  border-bottom: 10px solid rgba(88,88,88, 0.75)
+}
+.fs-overlink:hover, div.fs-overlink-active {
+  box-shadow: 0 5px 0px #585858
+}
+.fs-post-info, .fs-link-text, div.fs-detail-title {
+ color: #585858 
+}
+.fs-detail-nav-button .fs-arrow {
+  stroke: #585858
+}
+.fs-swatch-label {
+  position: absolute;
+  left: -100%;
+  right: 100%;
+  bottom: -25px;
+  width: 300%;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.fs-variant-select:hover .fs-swatch-label {
+  opacity: 1;
+  transition: opacity 0.3s;
+}
+</style>
+
+
+{% schema %}
+
+{
+  "name": "Product",
+  "class": "product-template",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "product_breadcrumb",
+      "label": "Show breadcrumb links"
+    },
+    {
+      "type": "checkbox",
+      "id": "display_vendor",
+      "label": "Show vendor"
+    },
+    {
+      "type": "checkbox",
+      "id": "display_sku",
+      "label": "Show SKU"
+    },
+    {
+      "type": "checkbox",
+      "id": "display_savings",
+      "label": "Show price savings",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "display_collections",
+      "label": "Show collections"
+    },
+    {
+      "type": "checkbox",
+      "id": "display_type",
+      "label": "Show type"
+    },
+    {
+      "type": "checkbox",
+      "id": "display_tags",
+      "label": "Show tags"
+    },
+    {
+      "type": "checkbox",
+      "id": "display_social_buttons",
+      "label": "Show social media share icons",
+      "default": true
+    },
+    {
+      "type": "radio",
+      "id": "product_description_position",
+      "label": "Description position",
+      "options": [
+        {
+          "value": "top",
+          "label": "Above product form"
+        },
+        {
+          "value": "bottom",
+          "label": "Below product form"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Product gallery"
+    },
+    {
+      "type": "checkbox",
+      "id": "gallery_arrows",
+      "label": "Show arrows on product gallery",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "activate_zoom",
+      "label": "Magnify product images on hover"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_product_lightbox",
+      "label": "Enable product gallery popup",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "activate_autoplay",
+      "label": "Enable product gallery slideshow"
+    },
+    {
+      "type": "select",
+      "id": "slideshow_animation",
+      "label": "Gallery transition",
+      "options": [
+        {
+          "value": "slide",
+          "label": "Slide"
+        },
+        {
+          "value": "fade",
+          "label": "Fade"
+        }
+      ],
+      "default": "slide"
+    },
+    {
+      "type": "radio",
+      "id": "product_images_position",
+      "label": "Gallery position",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "product_thumbs",
+      "label": "Show product gallery thumbnails",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "thumbnail_position",
+      "label": "Thumbnail position",
+      "default": "bottom-slider",
+      "options": [
+        {
+          "value": "bottom-thumbnails",
+          "label": "Bottom (grid)"
+        },
+        {
+          "value": "bottom-slider",
+          "label": "Bottom (slider)"
+        },
+        {
+          "value": "left-thumbnails",
+          "label": "Left"
+        },
+        {
+          "value": "right-thumbnails",
+          "label": "Right"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Product reviews"
+    },
+    {
+      "type": "paragraph",
+      "content": "Reviews app must be enabled. [Learn more](https://help.outofthesandbox.com/hc/en-us/articles/360008549274#section2)"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_shopify_product_badges",
+      "label": "Display star rating on product",
+      "default": false
+    },
+    {
+      "type": "radio",
+      "id": "review_position",
+      "label": "Reviews position",
+      "default": "next_to_gallery",
+      "options": [
+        {
+          "value": "next_to_gallery",
+          "label": "In product description area"
+        },
+        {
+          "value": "below_gallery",
+          "label": "Below image\/description"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Dynamic checkout button"
+    },
+    {
+      "type": "paragraph",
+      "content": "Lets customers check out directly using a familiar payment method. [Learn more](https://help.shopify.com/manual/using-themes/change-the-layout/dynamic-checkout)"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_payment_button",
+      "label": "Show dynamic checkout button",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Related products"
+    },
+    {
+      "type": "checkbox",
+      "id": "display_related_products",
+      "label": "Show related products",
+      "info": "[Learn more](https:\/\/help.outofthesandbox.com\/hc\/en-us\/articles\/115006909487-Related-Products)",
+      "default": true
+    },
+    {
+      "type": "radio",
+      "id": "related_products_style",
+      "label": "Layout",
+      "default": "grid",
+      "options": [
+        {
+          "value": "slider",
+          "label": "Slider"
+        },
+        {
+          "value": "grid",
+          "label": "Grid"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "related_products_limit",
+      "label": "Limit products",
+      "min": 3,
+      "max": 50,
+      "step": 1,
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "products_per",
+      "label": "Products per row",
+      "min": 3,
+      "max": 5,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "type": "header",
+      "content": "Recently viewed products"
+    },
+    {
+      "type": "paragraph",
+      "content": "To test the recently viewed products, view your online store outside of the Editor and visit multiple product pages. [Learn more](https:\/\/help.outofthesandbox.com\/hc\/en-us\/articles\/115008765228)"
+    },
+    {
+      "type": "checkbox",
+      "id": "display_recently_viewed",
+      "label": "Show recently viewed products",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "rv_title",
+      "label": "Title",
+      "default": "Recently Viewed Items"
+    },
+    {
+      "type": "radio",
+      "id": "rv_products_style",
+      "label": "Layout",
+      "default": "grid",
+      "options": [
+        {
+          "value": "slider",
+          "label": "Slider"
+        },
+        {
+          "value": "grid",
+          "label": "Grid"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "rv_max_display",
+      "label": "Products limit",
+      "min": 3,
+      "max": 12,
+      "step": 1,
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "rv_per",
+      "label": "Products per row",
+      "min": 3,
+      "max": 5,
+      "step": 1,
+      "default": 4
+    },
+    {
+      "type": "header",
+      "content": "Sidebar"
+    },
+    {
+      "type": "paragraph",
+      "content": "Create a sidebar by adding content blocks."
+    },
+    {
+      "type": "checkbox",
+      "id": "toggle",
+      "label": "Toggle sidebar content",
+      "default": false
+    }
+  ],
+  "blocks": [
+    {
+      "type": "filter_by_collection",
+      "name": "Collection list",
+      "limit": 1
+    },
+    {
+      "type": "menu",
+      "name": "Menu",
+      "settings": [
+        {
+          "type": "link_list",
+          "id": "custom_menu_linklist",
+          "label": "Menu"
+        }
+      ]
+    },
+    {
+      "type": "page",
+      "name": "Page",
+      "settings": [
+        {
+          "type": "page",
+          "id": "content_page",
+          "label": "Page"
+        }
+      ]
+    },
+    {
+      "type": "recently_viewed",
+      "name": "Recently viewed products",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "To test the recently viewed products, view your online store outside of the Editor and visit multiple product pages. [Learn more](https:\/\/help.outofthesandbox.com\/hc\/en-us\/articles\/115008765228)"
+        },
+        {
+          "type": "text",
+          "id": "sidebar_rv_title",
+          "label": "Title",
+          "default": "Recently Viewed"
+        },
+        {
+          "type": "range",
+          "id": "sidebar_rv_per",
+          "label": "Products limit",
+          "min": 1,
+          "max": 4,
+          "step": 1,
+          "default": 3
+        }
+      ]
+    },
+    {
+      "type": "filter_by_tag",
+      "name": "Tag list",
+      "limit": 1
+    },
+    {
+      "type": "text",
+      "name": "Text",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Heading",
+          "default": "Heading"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "<p>Text area can be used for special announcements or general information.</p>"
+        }
+      ]
+    },
+    {
+      "type": "filter_by_type",
+      "name": "Type list",
+      "limit": 1
+    },
+    {
+      "type": "filter_by_vendor",
+      "name": "Vendor list",
+      "limit": 1
+    }
+  ],
+  "default": {
+    "settings": {
+
+    }
+  }
+}
+
+{% endschema %}
