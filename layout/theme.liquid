@@ -96,6 +96,43 @@
       gtag('config', 'G-JKYE31LNLK');
     </script>
     <!-- End Global site tag (gtag.js) - Google Analytics -->
+  <!-- BING -->
+  <script>(function(w,d,t,r,u){
+      var f,n,i;
+      w[u]=w[u]||[],f=function(){
+        var o={
+          ti:"139001377"};
+        o.q=w[u],w[u]=new UET(o),w[u].push("pageLoad")}
+        ,n=d.createElement(t),n.src=r,n.async=1,n.onload=n.onreadystatechange=function(){
+        var s=this.readyState;
+        s&&s!=="loaded"&&s!=="complete"||(f(),n.onload=n.onreadystatechange=null)}
+        ,i=d.getElementsByTagName(t)[0],i.parentNode.insertBefore(n,i)}
+          )(window,document,"script","//bat.bing.com/bat.js","uetq");
+  </script>
+  <script>
+    window.uetq = window.uetq || [];
+    window.uetq.push("event", "", {"revenue_value":1,"currency":"USD"});
+  </script>
+  <script>
+    function uet_report_conversion() {
+      window.uetq = window.uetq || [];
+      window.uetq.push("event", "", {"revenue_value":1,"currency":"USD"});
+    }
+  </script>
+  <!-- BING -->
+<!-- AddShoppers -->
+<script type="text/javascript">
+    var AddShoppersWidgetOptions = { 'loadCss': false, 'pushResponse': false };
+    (!function(){
+        var t=document.createElement("script");
+        t.type="text/javascript",
+        t.async=!0,
+        t.id="AddShoppers",
+        t.src="https://shop.pe/widget/widget_async.js#6328669f9b239c04c44e9caa",
+        document.getElementsByTagName("head")[0].appendChild(t)
+    }());
+</script>
+<!-- AddShoppers -->
 </head>
 
   {% if template contains "index" %}
@@ -147,6 +184,16 @@
   <body class="{% if template == '404' %}error-404{% else %}{{ template | replace: '.', '-' | handle }}{% endif %}"
     data-money-format="{{ shop.money_format }}" data-shop-url="{{ shop.url }}">
 <script>window.KlarnaThemeGlobals={};{%case template.name%} {%when"product"%} {% if product.first_available_variant.price %}window.KlarnaThemeGlobals.data_purchase_amount = {{ product.first_available_variant.price }};{% endif %}window.KlarnaThemeGlobals.productVariants={{product.variants|json}};window.KlarnaThemeGlobals.documentCopy=document.cloneNode(true);{%when"cart"%} window.KlarnaThemeGlobals.data_purchase_amount={{cart.total_price}};window.KlarnaThemeGlobals.documentCopy=document.cloneNode(true);{%endcase%}</script>
+
+
+
+
+
+
+
+
+
+
 
 
     {% if template contains 'collection' or template contains 'search' %}
@@ -281,26 +328,6 @@
   <!-- CRITEO START -->
 {% include 'criteo-tracking' %}
 <!-- CRITEO END -->
-<!-- BING -->
-<script>
-  (function (w, d, t, r, u) {
-    var f, n, i;
-    (w[u] = w[u] || []),
-        (f = function () {
-            var o = { ti: "4036734" };
-            (o.q = w[u]), (w[u] = new UET(o)), w[u].push("pageLoad");
-        }),
-        (n = d.createElement(t)),
-        (n.src = r),
-        (n.async = 1),
-        (n.onload = n.onreadystatechange = function () {
-            var s = this.readyState;
-            (s && s !== "loaded" && s !== "complete") || (f(), (n.onload = n.onreadystatechange = null));
-        }),
-        (i = d.getElementsByTagName(t)[0]),
-        i.parentNode.insertBefore(n, i);
-	})(window, document, "script", "//bat.bing.com/bat.js", "uetq");
-</script>
 <!-- Adlucent Tracking Code -->
 <script type="text/javascript">
 (function() { 
@@ -319,6 +346,13 @@ adlPxID = qs.substring(qs.match("[?&]adlpxid=").index+9).split("&")[0];
 adlURL=document.location.protocol+"//tracking.deepsearch.adlucent.com/adlucent/Redirector/beacon?retailer="+adlRetailer+"&clickid="+adlClkID+"&pixelid="+adlPxID; 
 var pix = new Image(1,1); pix.src = adlURL; } })(); 
 </script>
+<!-- VUE.AI TAG -->
+<script src="https://vuex.vue.ai/embed-code/embed_code.js" async="async" defer="defer" data-msd-client-id="bd9f5d8d-e50a-4e51-9645-863f6148da59" data-msd-region="us-east-1"></script>
+{% if customer %}
+  <div data-user-id="{{ customer.id }}" hidden="hidden" class="vuex-user-id_hidden"></div>
+  <input type="hidden" value="{{ customer.email }}" data-customer-id="{{ customer.id }}" data-customer-email="{{ customer.email }}" data-customer-name="{{ customer.name }}">
+{% endif %}
+<!-- VUE.AI TAG -->
 </body>
 </html>
 {% endcapture %}

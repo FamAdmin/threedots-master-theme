@@ -3524,8 +3524,8 @@
         "type": "image-with-text-overlay",
         "settings": {
           "wide_display": true,
-          "image": "shopify:\/\/shop_images\/td_summerlaunch_hero_desktop.jpg",
-          "image_mobile": "shopify:\/\/shop_images\/td_summerlaunch_mobile_hero.jpg",
+          "image": "shopify:\/\/shop_images\/td_falllaunch_hero_desktop.jpg",
+          "image_mobile": "shopify:\/\/shop_images\/td_falllaunch_hero_mobile.jpg",
           "pretext": "",
           "title": "",
           "subtitle": "",
@@ -3911,11 +3911,39 @@
       },
       "collection-template": {
         "type": "collection-template",
+        "blocks": {
+          "b85a8368-6e14-4f34-970b-56e26dbaeab7": {
+            "type": "html",
+            "settings": {
+              "title": "",
+              "code": "<div id=\"vue-plp-1\"><\/div>"
+            }
+          },
+          "4d110f46-7efb-4658-9cdc-fed5837b0965": {
+            "type": "html",
+            "settings": {
+              "title": "",
+              "code": "<div id=\"vue-plp-2\"><\/div>"
+            }
+          },
+          "8b96856f-f250-4421-9a77-5f7deb4205b2": {
+            "type": "html",
+            "settings": {
+              "title": "",
+              "code": "<div id=\"vue-plp-3\"><\/div>"
+            }
+          }
+        },
+        "block_order": [
+          "b85a8368-6e14-4f34-970b-56e26dbaeab7",
+          "4d110f46-7efb-4658-9cdc-fed5837b0965",
+          "8b96856f-f250-4421-9a77-5f7deb4205b2"
+        ],
         "settings": {
           "display_collection_title": true,
           "collection_breadcrumb": true,
           "collection_tags": false,
-          "collection_sort": false,
+          "collection_sort": true,
           "featured_collection_image": false,
           "image_darken": false,
           "products_per_row": 3,
@@ -3937,6 +3965,26 @@
       },
       "product-template": {
         "type": "product-template",
+        "blocks": {
+          "c8e9cb85-6ec4-43b7-b29f-5701c0a79d2a": {
+            "type": "html",
+            "settings": {
+              "title": "",
+              "code": "<div id=\"vue-pdp-1\"><\/div>"
+            }
+          },
+          "97c6d899-7560-4509-80c7-200ffb513eea": {
+            "type": "html",
+            "settings": {
+              "title": "",
+              "code": "<div id=\"vue-pdp-2\"><\/div>"
+            }
+          }
+        },
+        "block_order": [
+          "c8e9cb85-6ec4-43b7-b29f-5701c0a79d2a",
+          "97c6d899-7560-4509-80c7-200ffb513eea"
+        ],
         "settings": {
           "product_breadcrumb": false,
           "display_vendor": false,
@@ -4016,6 +4064,109 @@
           "mobile_cell_width": "100%",
           "css": ".fs-title-link {    border-bottom: 1px solid #454545;     cursor: pointer;}"
         }
+      },
+      "1664310369981b2f7d": {
+        "type": "custom-section-html",
+        "blocks": {
+          "1664310369981b2f7d-0": {
+            "type": "richtext",
+            "disabled": true,
+            "settings": {
+              "title": ""
+            }
+          },
+          "1664310369981b2f7d-1": {
+            "type": "html",
+            "settings": {
+              "code": "<div id=\"vue-home-1\"><\/div>"
+            }
+          }
+        },
+        "block_order": [
+          "1664310369981b2f7d-0",
+          "1664310369981b2f7d-1"
+        ],
+        "settings": {
+          "title": ""
+        }
+      },
+      "166431046564ae2a94": {
+        "type": "custom-section-html",
+        "blocks": {
+          "166431046564ae2a94-0": {
+            "type": "richtext",
+            "disabled": true,
+            "settings": {
+              "title": ""
+            }
+          },
+          "166431046564ae2a94-1": {
+            "type": "html",
+            "settings": {
+              "code": "<div id=\"vue-home-2\"><\/div>"
+            }
+          }
+        },
+        "block_order": [
+          "166431046564ae2a94-0",
+          "166431046564ae2a94-1"
+        ],
+        "settings": {
+          "title": ""
+        }
+      },
+      "1664310531436f3652": {
+        "type": "custom-section-html",
+        "blocks": {
+          "1664310531436f3652-0": {
+            "type": "richtext",
+            "disabled": true,
+            "settings": {
+              "title": ""
+            }
+          },
+          "1664310531436f3652-1": {
+            "type": "html",
+            "settings": {
+              "code": "<div id=\"vue-home-3\"><\/div>"
+            }
+          }
+        },
+        "block_order": [
+          "1664310531436f3652-0",
+          "1664310531436f3652-1"
+        ],
+        "settings": {
+          "title": ""
+        }
+      },
+      "cart-template": {
+        "type": "cart-template",
+        "blocks": {
+          "9a91bc10-482a-43ce-9717-f0a4dfd1c685": {
+            "type": "html",
+            "settings": {
+              "title": "",
+              "code": "<div id=\"vue-cart-1\"><\/div>"
+            }
+          },
+          "cd47ed0c-4bf4-42c0-9dbf-5bea92a7a7c6": {
+            "type": "html",
+            "settings": {
+              "title": "",
+              "code": "<div id=\"vue-cart-2\"><\/div>"
+            }
+          }
+        },
+        "block_order": [
+          "9a91bc10-482a-43ce-9717-f0a4dfd1c685",
+          "cd47ed0c-4bf4-42c0-9dbf-5bea92a7a7c6"
+        ],
+        "settings": {
+          "display_special_instructions": false,
+          "display_savings": true,
+          "cart_message": ""
+        }
       }
     },
     "content_for_index": [
@@ -4035,7 +4186,10 @@
       "1489285524898",
       "1489285174583",
       "1489285367207",
-      "1489285418400"
+      "1489285418400",
+      "1664310369981b2f7d",
+      "166431046564ae2a94",
+      "1664310531436f3652"
     ]
   }
 }
