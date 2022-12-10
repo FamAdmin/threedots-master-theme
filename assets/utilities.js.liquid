@@ -48,14 +48,15 @@ var imageFunctions = {
         $carousel.find('.is-nav-selected').removeClass('is-nav-selected');
         $carousel.find('.gallery-cell:nth-child(' + (galleryData.selectedIndex + 1) + ')').addClass('is-nav-selected');
         
-        setTimeout(function() {
+        //Blocking Scrolling Issue affecting multiple viewports, ToDo Investigate what was this intended for
+        /*setTimeout(function() {
           var selectedThumbnail = document.getElementsByClassName('is-nav-selected');
           selectedThumbnail[0].scrollIntoView({
             behavior: "smooth",
             block: "nearest",
             inline: "nearest"
           });
-        })
+        })*/
       }
     });
   },
