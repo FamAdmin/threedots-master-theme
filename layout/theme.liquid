@@ -12,7 +12,7 @@
     <meta name="HandheldFriendly" content="True">
     <meta name="MobileOptimized" content="320">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="theme-color" content="{{ settings.shop_bg_color }}">acs
+    <meta name="theme-color" content="{{ settings.shop_bg_color }}">
 
     {% if current_tags %}{% assign meta_tags = current_tags | join: ', ' %}{% endif %}
     <title>
@@ -33,6 +33,23 @@
     {{ 'styles.scss.css' | asset_url | stylesheet_tag }}
     {{ 'style-custom.scss.css' | asset_url | stylesheet_tag }}
     <script src="{{ 'jquery.min.js' | asset_url }}"></script>
+
+
+   <!-- Twitter conversion tracking base code -->
+
+  <script>
+
+  !function(e,t,n,s,u,a){e.twq||(s=e.twq=function(){s.exe?s.exe.apply(s,arguments):s.queue.push(arguments);
+
+  },s.version='1.1',s.queue=[],u=t.createElement(n),u.async=!0,u.src='https://static.ads-twitter.com/uwt.js',
+
+  a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,'script');
+
+  twq('config','odcoh');
+
+  </script>
+
+  <!-- End Twitter conversion tracking base code -->
 
     <script>
       window.lazySizesConfig = window.lazySizesConfig || {};
@@ -133,6 +150,11 @@
     }());
 </script>
 <!-- AddShoppers -->
+
+  <script type="text/javascript">
+(function e(){var e=document.createElement("script");e.type="text/javascript",e.async=true,e.src="//staticw2.yotpo.com/VPPKVOEVQm0C498X5jYmYvgteezsyQJiGEg3uL8H/widget.js";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)})();
+</script>
+  
 </head>
 
   {% if template contains "index" %}
@@ -184,6 +206,12 @@
   <body class="{% if template == '404' %}error-404{% else %}{{ template | replace: '.', '-' | handle }}{% endif %}"
     data-money-format="{{ shop.money_format }}" data-shop-url="{{ shop.url }}">
 <script>window.KlarnaThemeGlobals={};{%case template.name%} {%when"product"%} {% if product.first_available_variant.price %}window.KlarnaThemeGlobals.data_purchase_amount = {{ product.first_available_variant.price }};{% endif %}window.KlarnaThemeGlobals.productVariants={{product.variants|json}};window.KlarnaThemeGlobals.documentCopy=document.cloneNode(true);{%when"cart"%} window.KlarnaThemeGlobals.data_purchase_amount={{cart.total_price}};window.KlarnaThemeGlobals.documentCopy=document.cloneNode(true);{%endcase%}</script>
+
+
+
+
+
+
 
 
 
@@ -358,3 +386,8 @@ var pix = new Image(1,1); pix.src = adlURL; } })();
 {% endcapture %}
 {% assign content = content | replace_first: '<!DOCTYPE', '!DOCTYPE' | split: ' <' %}
 {% for html in content %}{% assign htmlblock = html | strip | prepend: ' <' %}{{htmlblock | replace: ' </', '</'}}{% endfor %}
+<!-- Vue ai Headless -->
+  {% if template contains 'collection' %}
+    <script src="{{ 'headlessApp.js' | asset_url }}"></script>
+  {% endif %}
+<!-- Vue ai Headless -->
