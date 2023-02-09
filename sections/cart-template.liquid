@@ -59,7 +59,7 @@
       <div class="eleven columns medium-down--one-whole">
         {% assign total_saving = 0 %}
         {% for item in cart.items %}
-          <div class="vuex-oc-products_hidden" product_id="{{ item.product.id }}" quantity="{{ item.quantity }}" unit_price="{{ item.variant.price }}" hidden/>
+          <div class="vuex-oc-products_hidden" product_id="{{ item.product.id }}" quantity="{{ item.quantity }}" unit_price="{{ item.variant.price }}" hidden></div>
           {% if item.variant.compare_at_price > item.variant.price %}
             {% assign saving = item.variant.compare_at_price | minus: item.variant.price | times: item.quantity %}
             {% assign total_saving = saving | plus: total_saving %}

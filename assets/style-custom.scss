@@ -385,3 +385,18 @@ select.currencies {
   left: 0;
   right: 0 !important;
 }
+
+/* --------- Custom HTML Widgets PLP --------------------*/
+#shopify-section-collection-template {
+  .custom-content {
+    display: inline;
+    float: left;
+  }
+}
+
+/* --------- Custom HTML Widgets Cart --------------------*/
+#shopify-section-cart-template {
+  .custom-content {
+    display: inline-block;
+  }
+}

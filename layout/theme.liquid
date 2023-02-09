@@ -150,11 +150,6 @@
     }());
 </script>
 <!-- AddShoppers -->
-
-  <script type="text/javascript">
-(function e(){var e=document.createElement("script");e.type="text/javascript",e.async=true,e.src="//staticw2.yotpo.com/VPPKVOEVQm0C498X5jYmYvgteezsyQJiGEg3uL8H/widget.js";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)})();
-</script>
-  
 </head>
 
   {% if template contains "index" %}
@@ -372,6 +367,8 @@ var pix = new Image(1,1); pix.src = adlURL; } })();
   <input type="hidden" value="{{ customer.email }}" data-customer-id="{{ customer.id }}" data-customer-email="{{ customer.email }}" data-customer-name="{{ customer.name }}">
 {% endif %}
 <!-- VUE.AI TAG -->
+<!--Gorgias Chat Widget Start--><script id="gorgias-chat-widget-install-v2" src="https://config.gorgias.chat/gorgias-chat-bundle-loader.js?applicationId=27041"></script>
+<script id="gorgias-chat-shopify-install">!function(_){_.SHOPIFY_PERMANENT_DOMAIN="{{shop.permanent_domain}}",_.SHOPIFY_CUSTOMER_ID="{{customer.id}}",_.SHOPIFY_CUSTOMER_EMAIL="{{customer.email}}"}(window||{});</script><!--Gorgias Chat Widget End-->
 </body>
 </html>
 {% endcapture %}

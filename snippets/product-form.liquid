@@ -7,6 +7,20 @@
 {% endif %}
 
 {% assign variant = product.selected_or_first_available_variant %}
+
+<!-- Twitter conversion tracking event code -->
+
+<script type="text/javascript">
+
+// Insert Twitter Event ID
+
+twq('event', 'tw-odcoh-odcoj', {
+
+});
+
+</script>
+
+<!-- End Twitter conversion tracking event code -->
  
 <div class="clearfix product_form init smart-payment-button--{{ show_payment_button }} {% if product.variants.size > 1 or product.options.size > 1 %}product_form_options{% endif %} product_form--{{ settings.product_form_style }}"
       id="product-form-{{ product.id }}"
