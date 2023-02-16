@@ -28,7 +28,7 @@
 
 {% if section.settings.headless_toggle %}
   <div class="container" id="collection-{{ collection.id }}">
-    <div id="app" data-theme="threedots" data-category="{{ collection.handle }}" data-category-title="{{ collection.title }}">
+    <div id="app" data-theme="threedots" data-category="{{ collection.handle }}" data-category-title="{{ collection.title }}" data-user-id="{{ customer.id }}" data-ab-tests-enabled="{{ section.settings.ab_test_source_data_toogle }}">
       <template>
         <App :categorySelected="{{ collection.handle }}"></App>
       </template>
@@ -251,6 +251,12 @@
       "type": "checkbox",
       "id": "headless_toggle",
       "label": "Toggle for Headless Implementation",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "ab_test_source_data_toogle",
+      "label": "Toggle for AB Test Source Data Vue.ai",
       "default": false
     }
   ],
