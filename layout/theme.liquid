@@ -150,6 +150,11 @@
     }());
 </script>
 <!-- AddShoppers -->
+
+  <script type="text/javascript">
+(function e(){var e=document.createElement("script");e.type="text/javascript",e.async=true,e.src="//staticw2.yotpo.com/VPPKVOEVQm0C498X5jYmYvgteezsyQJiGEg3uL8H/widget.js";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)})();
+</script>
+  
 </head>
 
   {% if template contains "index" %}
@@ -337,8 +342,17 @@
  <script>(function(){var s = document.createElement('script'),e = ! document.body ? document.querySelector('head') : document.body;s.src = 'https://acsbapp.com/apps/app/assets/js/acsb.js';s.async = s.defer = true;s.onload = function(){acsbJS.init({statementLink : '',feedbackLink : '',footerHtml : '',hideMobile : true,hideTrigger : true,language : 'en',position : 'right',leadColor : '#69686d',triggerColor : '#69686d',triggerRadius : '50%',triggerPositionX : 'right',triggerPositionY : 'bottom',triggerIcon : 'default',triggerSize : 'medium',triggerOffsetX : 20,triggerOffsetY : 20,mobile : {triggerSize : 'small',triggerPositionX : 'right',triggerPositionY : 'bottom',triggerOffsetX : 10,triggerOffsetY : 10,triggerRadius : '50%'}});};e.appendChild(s);}());</script>
 <!-- Attentive and Shopify Tag Integration -->
     <script src="https://cdn.attn.tv/threedots/dtag.js"></script>
-    <!--  Removed Kustomer Chat -->
-    
+    <!--  Kustomer Chat -->
+    <script
+  src="https://cdn.kustomerapp.com/chat-web/widget.js"
+  data-kustomer-api-key='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwMjJlMWZkZmUyZTJiMDA4ZjcwMjZmMSIsInVzZXIiOiI2MDIyZTFmZDExMTI5NjAzNDQwMWQyMjAiLCJvcmciOiI1ZmYzNjY0M2M1ZjljNDhjYjNkMGI1ZWMiLCJvcmdOYW1lIjoiZmFtYnJhbmRzIiwidXNlclR5cGUiOiJtYWNoaW5lIiwicG9kIjoicHJvZDEiLCJyb2xlcyI6WyJvcmcudHJhY2tpbmciXSwiYXVkIjoidXJuOmNvbnN1bWVyIiwiaXNzIjoidXJuOmFwaSIsInN1YiI6IjYwMjJlMWZkMTExMjk2MDM0NDAxZDIyMCJ9.ta41KAvvDj0Hu_PE1ewTMj3GmTbmCqfPpgu7a7bKv3E'
+></script>
+<script>
+  Kustomer.start({
+    brandId: '6008912c130fd375d9ee8e42',
+    scheduleId: '6010b4b3db2301001938275b'
+  });
+</script>
   <!-- CRITEO START -->
 {% include 'criteo-tracking' %}
 <!-- CRITEO END -->
@@ -367,8 +381,6 @@ var pix = new Image(1,1); pix.src = adlURL; } })();
   <input type="hidden" value="{{ customer.email }}" data-customer-id="{{ customer.id }}" data-customer-email="{{ customer.email }}" data-customer-name="{{ customer.name }}">
 {% endif %}
 <!-- VUE.AI TAG -->
-<!--Gorgias Chat Widget Start--><script id="gorgias-chat-widget-install-v2" src="https://config.gorgias.chat/gorgias-chat-bundle-loader.js?applicationId=27041"></script>
-<script id="gorgias-chat-shopify-install">!function(_){_.SHOPIFY_PERMANENT_DOMAIN="{{shop.permanent_domain}}",_.SHOPIFY_CUSTOMER_ID="{{customer.id}}",_.SHOPIFY_CUSTOMER_EMAIL="{{customer.email}}"}(window||{});</script><!--Gorgias Chat Widget End-->
 </body>
 </html>
 {% endcapture %}
