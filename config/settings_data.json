@@ -3955,7 +3955,7 @@
           "products_per_row": 3,
           "pagination_limit": 18,
           "toggle": false,
-          "headless_toggle": false,
+          "headless_toggle": true,
           "ab_test_source_data_toogle": true
         }
       },
