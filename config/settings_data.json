@@ -3529,8 +3529,8 @@
         "type": "image-with-text-overlay",
         "settings": {
           "wide_display": true,
-          "image": "shopify:\/\/shop_images\/td_refresh_hero_desktop.jpg",
-          "image_mobile": "shopify:\/\/shop_images\/td_refresh_hero_mobile.jpg",
+          "image": "shopify:\/\/shop_images\/td_refresh_hero_desktop-1.jpg",
+          "image_mobile": "shopify:\/\/shop_images\/td_refresh_hero_mobile-1.jpg",
           "pretext": "",
           "title": "",
           "subtitle": "",
@@ -3560,7 +3560,7 @@
           "1489283737905-0": {
             "type": "image",
             "settings": {
-              "image": "shopify:\/\/shop_images\/td_winter_module_newarrivals.jpg",
+              "image": "shopify:\/\/shop_images\/td_spring_module_newarrivals.jpg",
               "link": "shopify:\/\/collections\/new-arrivals",
               "title": "shop new arrivals",
               "text": "",
@@ -3570,7 +3570,7 @@
           "1575935147496": {
             "type": "image",
             "settings": {
-              "image": "shopify:\/\/shop_images\/td_winter_module_bestsellers.jpg",
+              "image": "shopify:\/\/shop_images\/td_spring_module_bestsellers.jpg",
               "link": "shopify:\/\/collections\/best-sellers",
               "title": "shop best sellers",
               "text": "",
@@ -3580,7 +3580,7 @@
           "1489283737905-1": {
             "type": "image",
             "settings": {
-              "image": "shopify:\/\/shop_images\/td_winter_module_sale.jpg",
+              "image": "shopify:\/\/shop_images\/td_spring_module_sale.jpg",
               "link": "shopify:\/\/collections\/sale",
               "title": "shop sale",
               "text": "<p>everyday luxe comfort<\/p>",
@@ -4048,8 +4048,8 @@
         "type": "image-with-text-overlay",
         "settings": {
           "wide_display": true,
-          "image": "shopify:\/\/shop_images\/td_esstees_2ndhero_desktop.jpg",
-          "image_mobile": "shopify:\/\/shop_images\/td_esstees_2ndhero_mobile.jpg",
+          "image": "shopify:\/\/shop_images\/td_esstees_2ndhero_desktop_3f790555-570d-4890-bfeb-1583d69a12a4.jpg",
+          "image_mobile": "shopify:\/\/shop_images\/td_esstees_2ndhero_mobile_a22191eb-16c9-44e9-b7ae-9199717a43df.jpg",
           "pretext": "",
           "title": "",
           "subtitle": "",
