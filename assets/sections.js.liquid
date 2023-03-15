@@ -530,6 +530,7 @@ selectCallback = function(variant, selector) {
     $('.items_left', $product).text('');
     $('.quantity', $product).removeAttr('max');
     $('.sold_out', $product).text(message);
+    $('.klaviyo-bis-trigger', $product).style.removeProperty('display');
     $('.add_to_cart', $product).addClass('disabled').attr('disabled', 'disabled').find('span').text(message);
     $('.shopify-payment-button', $product).hide();
     $notify_form.hide();
