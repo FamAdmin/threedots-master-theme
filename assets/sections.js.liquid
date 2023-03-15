@@ -513,7 +513,7 @@ selectCallback = function(variant, selector) {
     }
 
     $('.sold_out', $product).text('');
-    document.getElementsByClassName('klaviyo-bis-trigger')[0].style.setProperty('display', 'none');
+    //document.getElementsByClassName('klaviyo-bis-trigger')[0].style.setProperty('display', 'none');
     if (variant.price > 0) {
       $('.current_price', $product).html('<span class="money">' + Shopify.formatMoney(variant.price, $('body').data('money-format')) + '</span>');
     } else {
