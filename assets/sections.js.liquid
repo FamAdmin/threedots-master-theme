@@ -513,7 +513,7 @@ selectCallback = function(variant, selector) {
     }
 
     $('.sold_out', $product).text('');
-    $('.klaviyo-bis-trigger', $product).style.setProperty('display', 'none');
+    document.getElementsByClassName('klaviyo-bis-trigger')[0].style.setProperty('display', 'none');
     if (variant.price > 0) {
       $('.current_price', $product).html('<span class="money">' + Shopify.formatMoney(variant.price, $('body').data('money-format')) + '</span>');
     } else {
@@ -531,7 +531,7 @@ selectCallback = function(variant, selector) {
     $('.items_left', $product).text('');
     $('.quantity', $product).removeAttr('max');
     $('.sold_out', $product).text(message);
-    $('.klaviyo-bis-trigger', $product).style.removeProperty('display');
+    document.getElementsByClassName('klaviyo-bis-trigger')[0].style.removeProperty('display');
     $('.add_to_cart', $product).addClass('disabled').attr('disabled', 'disabled').find('span').text(message);
     $('.shopify-payment-button', $product).hide();
     $notify_form.hide();
