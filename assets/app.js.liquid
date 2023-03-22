@@ -407,7 +407,7 @@ $(function() {
     });
   }
 
-  function refreshCart(cart) {
+  refreshCart = function refreshCart(cart) {
     $(".cart_count").empty();
     $cartBtn = $(".cart_count");
     var value = $cartBtn.text() || '0';
