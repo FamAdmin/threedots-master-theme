@@ -2432,7 +2432,7 @@ html.touchevents .cart .cart_container {
   top: 40px;
   right: 0;
   position: absolute;
-  z-index: 2000;
+  z-index: 2001;
   background-color: {{ settings.minicart_bg_color }};
   font-family: {{ settings.regular__font.family }}, {{ settings.regular__font.fallback_families }};
   font-weight: {{ settings.regular__font.weight }};
@@ -2474,6 +2474,7 @@ div.cart_content form {
 }
 
 .cart_content ul {
+  display: grid;
   list-style: none;
   margin: 0;
   padding: 15px 20px;

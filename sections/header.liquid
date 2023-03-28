@@ -4,6 +4,7 @@
 {% endcomment %}
 
 {% comment %}Mobile navigation{% endcomment %}
+{% render 'go-cart-button' %}
 <header id="header" class="mobile_nav-fixed--{{ section.settings.fixed_header }}">
   {% if section.settings.promo_text != blank %}
       <div class="promo_banner" style="background-color: {{ section.settings.announcement_bg }};">
