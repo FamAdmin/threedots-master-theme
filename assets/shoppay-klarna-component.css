@@ -1,0 +1,44 @@
+.shoppay-klarna-component {
+  flex-direction: row;
+  justify-content: flex-start;
+  display: flex;
+  align-items: center;
+  color: #17120f;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 29px;
+  background-color: #FFFFFF;
+  border-style: solid;
+  border-color: #eae7e4;
+  border-radius: 0px;
+  border-width: 1px;
+  padding: 14px;
+}
+
+klarna-placement,
+shopify-payment-terms
+{
+  display: none;
+}
+
+.shoppay-klarna-component-shoppay-logo svg {
+  height: 30px;
+  width: 59px;
+  vertical-align: middle;
+}
+
+.shoppay-klarna-component-container {
+  display: flex;
+}
+
+.shoppay-klarna-component-container span {
+  flex-wrap: wrap;
+  display: flex;
+}
+
+.shoppay-klarna-component-shoppay-logo,
+.shoppay-klarna-component-klarna-logo {
+  cursor: pointer;
+  display: flex;
+  margin: 0 5px;
+}
