@@ -4064,6 +4064,7 @@
       },
       "1583259612455": {
         "type": "foursixty-carousel",
+        "disabled": true,
         "settings": {
           "title": "Like it on Instagram. <span class=\"fs-title-link\">Get the look.<\/span>",
           "subtitle": "Share your looks with #wearethreedots and tag @shopthreedots.",
@@ -4209,6 +4210,14 @@
           "blog_additional_posts": false,
           "read_more_link": true,
           "toggle": false
+        }
+      },
+      "go-cart": {
+        "type": "go-cart",
+        "settings": {
+          "free_shipping_text": "Free Standard Shipping!*",
+          "taxes_text": "*U.S. orders only, International shipping rates apply. Taxes will be calculated at checkout.",
+          "upsell_title": "LEVEL UP YOUR WORKOUT"
         }
       }
     },
