@@ -4062,18 +4062,6 @@
           "text_align": "center"
         }
       },
-      "1583259612455": {
-        "type": "foursixty-carousel",
-        "disabled": true,
-        "settings": {
-          "title": "Like it on Instagram. <span class=\"fs-title-link\">Get the look.<\/span>",
-          "subtitle": "Share your looks with #wearethreedots and tag @shopthreedots.",
-          "extension": "three-dots_1",
-          "desktop_cell_width": "33.334%",
-          "mobile_cell_width": "100%",
-          "css": ".fs-title-link {    border-bottom: 1px solid #454545;     cursor: pointer;}"
-        }
-      },
       "1664310369981b2f7d": {
         "type": "custom-section-html",
         "blocks": {
@@ -4231,7 +4219,6 @@
       "1664310369981b2f7d",
       "1664310531436f3652",
       "1489285451288",
-      "1583259612455",
       "1489283660007",
       "1562098120514",
       "1489284011497",
