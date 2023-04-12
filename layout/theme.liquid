@@ -36,13 +36,7 @@
     <script src="{{ 'jquery.min.js' | asset_url }}"></script>
 
 
-<!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-M2W523L');</script>
-<!-- End Google Tag Manager -->
+
 
 
    <!-- Twitter conversion tracking base code -->
@@ -105,6 +99,23 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     {% include 'social-meta-info' %}
     {% if collection.previous_product %}<link rel="prev" href="{{ collection.previous_product }}">{% endif %}
     {% if collection.next_product %}<link rel="next" href="{{ collection.next_product }}">{% endif %}
+
+  <!-- Global site tag (gtag.js) - Google Ads: 1028879269 --> 
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-1028879269"></script> 
+    <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'AW-1028879269'); </script>
+	{% if template contains 'collection' or template contains 'search' %}
+    <script>var maxSwatches = window.innerWidth >= 768 ? window.innerWidth >= 1024 ? 7 : 5 : 4</script>
+    {% endif %}
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-JKYE31LNLK"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-JKYE31LNLK');
+    </script>
+    <!-- End Global site tag (gtag.js) - Google Analytics -->
     
     
   <!-- BING -->
@@ -224,10 +235,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     </script>
     {% endif %}
 
-<!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M2W523L"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
+
   
 <!-- <script   
   src="https://na-library.klarnaservices.com/lib.js"
