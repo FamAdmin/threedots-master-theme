@@ -4185,7 +4185,7 @@
         "type": "article-template",
         "settings": {
           "banner_enabled": true,
-          "image_darken": false,
+          "image_darken": true,
           "blog_breadcrumb": true,
           "blog_pagination": true,
           "blog_tags": false,
