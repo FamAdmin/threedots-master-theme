@@ -1,3 +1,7 @@
+
+{% if shop.metafields.gift_hero.giftcards.active and product.gift_card? %}
+  <div id="sc-giftcard-builder">
+{% endif %}
 {% comment %}
   The contents of the product.liquid template can be found in /sections/product-template.liquid
 {% endcomment %}
@@ -15,3 +19,6 @@ data-currency="{{ shop.currency }}"
 data-description="{{ product.description | escape }}">
 </div>
 </br>
+{% if shop.metafields.gift_hero.giftcards.active and product.gift_card? %}
+  </div>
+{% endif %}
