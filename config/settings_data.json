@@ -3605,7 +3605,7 @@
         "settings": {
           "title": "everyday essentials",
           "collection_description": true,
-          "collection": "essential-tees",
+          "collection": "essential-tees-old-f806e3",
           "collection_style": "slider",
           "products_per": 4,
           "products_limit": 10
@@ -4056,7 +4056,7 @@
           "caption_background": false,
           "caption_background_transparency": false,
           "button1": "",
-          "button1_link": "shopify:\/\/collections\/essential-tees",
+          "button1_link": "shopify:\/\/collections\/essential-tees-old-f806e3",
           "button1_highlight": false,
           "text_position": "center",
           "text_align": "center"
