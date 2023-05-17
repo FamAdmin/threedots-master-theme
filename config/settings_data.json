@@ -3529,8 +3529,8 @@
         "type": "image-with-text-overlay",
         "settings": {
           "wide_display": true,
-          "image": "shopify:\/\/shop_images\/td_refresh_hero_desktop-1.jpg",
-          "image_mobile": "shopify:\/\/shop_images\/td_refresh_hero_mobile-1.jpg",
+          "image": "shopify:\/\/shop_images\/td_summer_hero_desktop.jpg",
+          "image_mobile": "shopify:\/\/shop_images\/td_summer_hero_mobile.jpg",
           "pretext": "",
           "title": "",
           "subtitle": "",
