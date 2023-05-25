@@ -443,3 +443,5 @@ var pix = new Image(1,1); pix.src = adlURL; } })();
 {% assign content = content | replace_first: '<!DOCTYPE', '!DOCTYPE' | split: ' <' %}
 {% for html in content %}{% assign htmlblock = html | strip | prepend: ' <' %}{{htmlblock | replace: ' </', '</'}}{% endfor %}
 
+
+{% if content_for_header contains "kimonix_void_script" %}<script async id="kimonix_caller_script" src="https://api.kimonix.com/kimonix_product_recommendations_script.js?shop=three3dots.myshopify.com"></script>{% endif %}
