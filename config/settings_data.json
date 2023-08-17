@@ -4036,12 +4036,11 @@
       },
       "1574708655056": {
         "type": "banner-text",
-        "disabled": true,
         "settings": {
           "wide_display": true,
-          "banner_link": "shopify:\/\/collections\/new-arrivals",
-          "image": "shopify:\/\/shop_images\/3D__35off150_Desktop.jpg",
-          "image_mobile": "shopify:\/\/shop_images\/3D_35off150_Mobile.jpg"
+          "banner_link": "shopify:\/\/collections\/best-sellers",
+          "image": "shopify:\/\/shop_images\/Desktop_5ff067ca-fe2c-4c51-b5e8-4ef34d442faa.jpg",
+          "image_mobile": "shopify:\/\/shop_images\/Mobile_dabe50ab-7e07-4848-a4b3-f12d5bf1de0a.jpg"
         }
       },
       "1576023422992": {
