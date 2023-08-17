@@ -3950,7 +3950,6 @@
           "collection_breadcrumb": true,
           "collection_tags": false,
           "collection_sort": true,
-          "image": "shopify:\/\/shop_images\/Desktop_5ff067ca-fe2c-4c51-b5e8-4ef34d442faa.jpg",
           "featured_collection_image": false,
           "image_darken": false,
           "products_per_row": 3,
@@ -4206,6 +4205,23 @@
           "free_shipping_text": "Free Standard Shipping!*",
           "taxes_text": "*U.S. orders only, International shipping rates apply. Taxes will be calculated at checkout.",
           "upsell_title": "LEVEL UP YOUR WORKOUT"
+        }
+      },
+      "collection-sub-collections-template": {
+        "type": "collection-sub-collections-template",
+        "settings": {
+          "featured_collection_image": false,
+          "image_darken": false,
+          "collection_breadcrumb": true,
+          "display_collection_title": false,
+          "collection_tags": false,
+          "collection_sort": false,
+          "align_height": false,
+          "collection_height": 200,
+          "collections_per_row": 3,
+          "products_per_row": 3,
+          "pagination_limit": 48,
+          "toggle": false
         }
       }
     },
