@@ -4036,6 +4036,7 @@
       },
       "1574708655056": {
         "type": "banner-text",
+        "disabled": true,
         "settings": {
           "wide_display": true,
           "banner_link": "shopify:\/\/collections\/best-sellers",
