@@ -58,14 +58,14 @@
         // START HELPER FUNCTIONS
 
         /*
-        Replaces AMOUNT in moneyFormat with an actual value, pulled from numFormat, and trims any white space
-        */
+         Replaces AMOUNT in moneyFormat with an actual value, pulled from numFormat, and trims any white space
+         */
         function currencyFormat(amount) {
             return moneyFormat.replace('AMOUNT', numFormat.formatToParts(Number(amount)).filter(c => c.type !== 'currency').map(c => c.value).join('').trim());
         }
 
         /*
-        Turns a string into an HTML element
+         Turns a string into an HTML element
          */
         function htmlToElement(html) {
             const template = document.createElement('template');
@@ -128,9 +128,9 @@
         }
 
         /*
-        Create new summary lines for the duty and tax values
-        parameters:
-            - node: The DOM Node from which to build off (should be the Summary Shipping Price element)
+         Create new summary lines for the duty and tax values
+         parameters:
+         - node: The DOM Node from which to build off (should be the Summary Shipping Price element)
          */
         function setDutyTaxLines(node) {
             if (!node) {
@@ -225,9 +225,9 @@
         }
 
         /*
-        Returns the breakdown element from a shippingMethod
-        parameters:
-            - shippingMethod: The shipping method container to parse
+         Returns the breakdown element from a shippingMethod
+         parameters:
+         - shippingMethod: The shipping method container to parse
          */
         function findBreakdownElement(shippingMethod) {
             let zBreakdownElement = shippingMethod.firstElementChild.nextElementSibling.firstElementChild.firstElementChild.nextElementSibling;
@@ -246,11 +246,11 @@
         }
 
         /*
-        Do work for DDP shipping options
-        parameters:
-            - shippingMethod: the shipping method container element
-            - zMethodSplit: array of the shippingMethod text, split by \n
-            - zBreakdownElement: the element containing the shipping/duty/tax breakdown text
+         Do work for DDP shipping options
+         parameters:
+         - shippingMethod: the shipping method container element
+         - zMethodSplit: array of the shippingMethod text, split by \n
+         - zBreakdownElement: the element containing the shipping/duty/tax breakdown text
          */
         function ddpOption(shippingMethod, zMethodSplit, zBreakdownElement) {
             let breakdown;
@@ -315,9 +315,9 @@
         }
 
         /*
-        Hides the shipping/duty/tax breakdown element for DDU service levels
-        parameters:
-            - shippingMethod: the shipping method container element
+         Hides the shipping/duty/tax breakdown element for DDU service levels
+         parameters:
+         - shippingMethod: the shipping method container element
          */
         function dduOption(shippingMethod) {
             shippingMethod.onclick = (e) => {
