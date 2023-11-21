@@ -3571,7 +3571,7 @@
             "type": "image",
             "settings": {
               "image": "shopify:\/\/shop_images\/td_spring_module_bestsellers.jpg",
-              "link": "shopify:\/\/collections\/best-sellers",
+              "link": "shopify:\/\/collections\/best-sellers-old-f486e2",
               "title": "shop best sellers",
               "text": "",
               "button_label": "Hello 3"
@@ -4039,7 +4039,7 @@
         "disabled": true,
         "settings": {
           "wide_display": true,
-          "banner_link": "shopify:\/\/collections\/best-sellers",
+          "banner_link": "shopify:\/\/collections\/best-sellers-old-f486e2",
           "image": "shopify:\/\/shop_images\/Desktop_5ff067ca-fe2c-4c51-b5e8-4ef34d442faa.jpg",
           "image_mobile": "shopify:\/\/shop_images\/Mobile_dabe50ab-7e07-4848-a4b3-f12d5bf1de0a.jpg"
         }
@@ -4262,12 +4262,6 @@
       },
       "855628211100114053": {
         "type": "shopify:\/\/apps\/klaviyo-email-marketing-sms\/blocks\/klaviyo-onsite-embed\/2632fe16-c075-4321-a88b-50b567f42507",
-        "disabled": false,
-        "settings": {
-        }
-      },
-      "15493114679298500990": {
-        "type": "shopify:\/\/apps\/gift-card-hero-ultimate-tool\/blocks\/app-embed\/57babc6a-ae2b-46cf-b565-dd8395b0276b",
         "disabled": false,
         "settings": {
         }
